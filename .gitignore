@@ -4,5 +4,11 @@ __pycache__/
 output/*.pdf
 output/rendered/
 output/.charts/
+output/replit_series_e_investor_deck.pptx
+output/replit_series_e_investor_deck_v2.pptx
+output/replit_series_e_investor_deck_v3.pptx
+output/replit_series_e_sourcebook.xlsx
+output/replit_series_e_sourcebook_v2.xlsx
+output/replit_series_e_sourcebook_v3.xlsx
 ~$*.pptx
 ~$*.xlsx
