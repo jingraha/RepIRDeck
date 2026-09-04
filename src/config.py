@@ -14,8 +14,8 @@ ASSUMPTIONS_PATH = DATA_DIR / "assumptions.yaml"
 SOURCES_PATH = DATA_DIR / "public_sources.yaml"
 SLIDE_CONTENT_PATH = DATA_DIR / "slide_content.yaml"
 
-PPTX_PATH = OUTPUT_DIR / "replit_series_e_investor_deck.pptx"
-XLSX_PATH = OUTPUT_DIR / "replit_series_e_sourcebook.xlsx"
+PPTX_PATH = OUTPUT_DIR / "replit_series_e_investor_deck_v2.pptx"
+XLSX_PATH = OUTPUT_DIR / "replit_series_e_sourcebook_v2.xlsx"
 
 SLIDE_WIDTH = Inches(13.333333)
 SLIDE_HEIGHT = Inches(7.5)
@@ -23,8 +23,12 @@ SLIDE_HEIGHT = Inches(7.5)
 COLORS = {
     "orange": "FF3C00",
     "orange_bright": "FF3C00",
-    "blue": "2492FF",
-    "coral": "FFB199",
+    "orange_dark": "B83200",
+    "orange_mid": "FF764D",
+    "orange_soft": "FF9A76",
+    "orange_pale": "FFE1D6",
+    "blue": "FF764D",
+    "coral": "D95A2B",
     "cream": "FAF6F1",
     "paper": "FFFDFC",
     "ink": "181818",
@@ -35,9 +39,9 @@ COLORS = {
     "gray_200": "DBD4CF",
     "gray_100": "F5F3F0",
     "white": "FFFFFF",
-    "green": "228B5A",
-    "red": "C33B32",
-    "yellow": "E8A317",
+    "green": "9F350F",
+    "red": "B83200",
+    "yellow": "FF8A5C",
 }
 
 FONT_SANS = "Arial"

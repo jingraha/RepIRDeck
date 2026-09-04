@@ -19,6 +19,7 @@ from .model import ModelBundle
 from .pptx_helpers import (
     add_bullet_list,
     add_card_title,
+    add_chart_legend,
     add_chevron,
     add_circle,
     add_horizontal_bars,
@@ -211,7 +212,7 @@ class DeckBuilder:
         )
         add_text(
             slide,
-            "Build the software\nthe world is waiting for",
+            "Build and run software\nfrom one prompt",
             0.75,
             1.68,
             9.5,
@@ -223,7 +224,7 @@ class DeckBuilder:
         )
         add_text(
             slide,
-            "A $1B financing to scale the creation layer for software",
+            "Series E financing | $1B raise | $20B pre-money",
             0.78,
             3.93,
             8.7,
@@ -236,6 +237,15 @@ class DeckBuilder:
             (f"${tx['pre_money'] / 1000:.0f}B", "Pre-money", "blue"),
             (f"${tx['primary']:.0f}M", "Primary", "coral"),
         ]
+        add_tag(
+            slide,
+            "Illustrative financing case",
+            0.78,
+            4.65,
+            fill="charcoal",
+            color="gray_300",
+            width=1.78,
+        )
         for index, (value, label, accent) in enumerate(cards):
             add_metric_card(
                 slide,
@@ -246,7 +256,6 @@ class DeckBuilder:
                 value,
                 label,
                 accent=accent,
-                evidence="ILLUSTRATIVE",
                 fill="charcoal",
                 dark=True,
                 value_size=23,
@@ -381,14 +390,14 @@ class DeckBuilder:
             [
                 {"text": "Primary: ", "font_size": 11, "bold": True, "color": "white"},
                 {
-                    "text": "funds four growth engines and execution reserve",
-                    "font_size": 11,
+                    "text": "funds models, users, enterprise sales, international growth, and talent",
+                    "font_size": 9.5,
                     "color": "gray_300",
                 },
-                {"text": "   |   Secondary: ", "font_size": 11, "bold": True, "color": "white"},
+                {"text": "   |   Secondary: ", "font_size": 9.5, "bold": True, "color": "white"},
                 {
-                    "text": "targeted employee and early-holder liquidity",
-                    "font_size": 11,
+                    "text": "employee and early-investor liquidity",
+                    "font_size": 9.5,
                     "color": "gray_300",
                 },
             ],
@@ -405,31 +414,31 @@ class DeckBuilder:
             (
                 "01",
                 "Distribution",
-                "50M+ users create a global top-of-funnel that most enterprise platforms cannot replicate.",
+                "50M+ users give Replit a direct path to teams and enterprise accounts.",
                 "orange",
             ),
             (
                 "02",
                 "Full-stack platform",
-                "Agent, workspace, collaboration, deployment, and runtime live in one closed loop.",
+                "Agent, workspace, collaboration, deployment, and runtime are in one product.",
                 "blue",
             ),
             (
                 "03",
-                "Enterprise pull",
-                "Users from 85% of the Fortune 500 validate bottom-up demand inside large organizations.",
+                "Enterprise demand",
+                "Users from 85% of the Fortune 500 show demand inside large companies.",
                 "coral",
             ),
             (
                 "04",
-                "Expanding economics",
-                "Model routing, workload density, and enterprise mix drive gross-margin expansion.",
+                "Improving margins",
+                "Lower model cost and more enterprise revenue lift gross margin.",
                 "green",
             ),
             (
                 "05",
-                "Massive optionality",
-                "Replit monetizes creators, professional teams, governed enterprises, and running software.",
+                "Several revenue sources",
+                "Replit earns revenue from individuals, teams, enterprises, agents, and running apps.",
                 "charcoal",
             ),
         ]
@@ -453,7 +462,7 @@ class DeckBuilder:
         add_rect(slide, 0.65, 5.87, 12.03, 0.64, fill="orange", radius=True)
         add_text(
             slide,
-            "The underwriting question is no longer whether AI changes software creation—it is who owns the complete creation-to-runtime loop.",
+            "AI changes software creation. The key question is who owns the full workflow.",
             0.95,
             6.02,
             11.4,
@@ -495,7 +504,7 @@ class DeckBuilder:
         add_rect(slide, 0.65, 5.17, 12.03, 1.33, fill="ink", radius=True)
         add_text(
             slide,
-            "From coding environment to software creation platform",
+            "One product from idea to running app",
             0.98,
             5.34,
             4.5,
@@ -558,7 +567,7 @@ class DeckBuilder:
                 add_chevron(slide, 7.30 + index * 1.52, 5.73, 0.19, 0.26, fill="gray_500")
         add_text(
             slide,
-            "One monetization loop",
+            "One revenue loop",
             6.05,
             6.08,
             6.0,
@@ -760,12 +769,12 @@ class DeckBuilder:
         estimates = [
             (f"{benchmarks['specialized_tools']}+", "specialized tools", "orange"),
             (
-                f"{benchmarks['handoffs_low']}–{benchmarks['handoffs_high']}",
+                f"{benchmarks['handoffs_low']} to {benchmarks['handoffs_high']}",
                 "cross-functional handoffs",
                 "blue",
             ),
             (
-                f"{benchmarks['cycle_weeks_low']}–{benchmarks['cycle_weeks_high']} wks",
+                f"{benchmarks['cycle_weeks_low']} to {benchmarks['cycle_weeks_high']} wks",
                 "idea-to-production cycle",
                 "coral",
             ),
@@ -791,7 +800,7 @@ class DeckBuilder:
         add_rect(slide, 0.65, 6.03, 12.03, 0.48, fill="gray_100", radius=True)
         add_text(
             slide,
-            "The scarce resource is no longer code generation—it is coordinated progress from intent to a secure, running outcome.",
+            "The scarce resource is coordinated work from an idea to a secure, running product.",
             0.90,
             6.14,
             11.55,
@@ -899,7 +908,7 @@ class DeckBuilder:
         add_rect(slide, 0.65, 6.15, 12.03, 0.37, fill="white", line="gray_200", radius=True)
         add_text(
             slide,
-            "The platform captures both the creation workflow and the running workload—expanding monetization and improving the next build.",
+            "The product records the build workflow and the running workload. This data improves the next build.",
             0.88,
             6.23,
             11.60,
@@ -1091,7 +1100,7 @@ class DeckBuilder:
             cursor += scaled
         add_text(
             slide,
-            f"{benchmarks['cycle_weeks_low']}–{benchmarks['cycle_weeks_high']} weeks",
+            f"{benchmarks['cycle_weeks_low']} to {benchmarks['cycle_weeks_high']} weeks",
             9.15,
             2.25,
             1.65,
@@ -1194,7 +1203,7 @@ class DeckBuilder:
         add_circle(slide, center_x, center_y, 2.20, fill="ink")
         add_text(
             slide,
-            "CREATION\nINFLECTION",
+            "WHY\nNOW",
             center_x,
             center_y,
             2.20,
@@ -1209,7 +1218,7 @@ class DeckBuilder:
         catalysts = [
             ("01", "Capability", "Agents plan, test, and repair across full applications.", "orange", (0.65, 1.75)),
             ("02", "Economics", "Inference and routing costs decline as quality rises.", "blue", (8.87, 1.75)),
-            ("03", "Labor", "Software demand compounds faster than engineering capacity.", "coral", (0.65, 4.55)),
+            ("03", "Labor", "Software demand grows faster than engineering capacity.", "coral", (0.65, 4.55)),
             ("04", "Distribution", "Cloud creation reaches users outside traditional IDEs.", "green", (8.87, 4.55)),
             ("05", "Governance", "Identity, security, and policy make enterprise rollout viable.", "charcoal", (4.68, 5.25)),
         ]
@@ -1347,7 +1356,7 @@ class DeckBuilder:
         )
         add_text(
             slide,
-            "The market model is bottom-up; third-party category forecasts are used only as triangulation.",
+            "The market model is bottom-up. Third-party forecasts provide a reasonableness check.",
             0.65,
             5.80,
             6.30,
@@ -1432,7 +1441,7 @@ class DeckBuilder:
         add_rect(slide, 0.65, 6.12, 12.03, 0.40, fill="white", line="gray_200", radius=True)
         add_text(
             slide,
-            "Replit's structural advantage is breadth: the same environment acquires creators, coordinates agents, and runs governed software.",
+            "Replit covers more steps. One product brings in users, coordinates agents, and runs governed software.",
             0.92,
             6.20,
             11.50,
@@ -1451,9 +1460,9 @@ class DeckBuilder:
         add_stacked_columns(
             slide,
             0.65,
-            1.78,
+            2.10,
             7.60,
-            4.55,
+            4.23,
             [str(year) + ("E" if year >= 2026 else "A") for year in years],
             [
                 {
@@ -1477,9 +1486,9 @@ class DeckBuilder:
         )
         add_text(
             slide,
-            "Revenue by monetization engine",
+            "REVENUE BY SOURCE, $M",
             0.80,
-            1.78,
+            1.72,
             3.0,
             0.25,
             font_size=8,
@@ -1487,7 +1496,18 @@ class DeckBuilder:
             bold=True,
             font_name=FONT_MONO,
         )
-        add_tag(slide, "EST.", 7.35, 1.79, width=0.62)
+        add_chart_legend(
+            slide,
+            [
+                ("Individual", "orange"),
+                ("Enterprise", "blue"),
+                ("Agent use and hosting", "coral"),
+            ],
+            2.62,
+            1.73,
+            item_width=1.62,
+        )
+        add_tag(slide, "EST.", 7.35, 1.73, width=0.62)
 
         add_metric_card(
             slide,
@@ -1496,7 +1516,7 @@ class DeckBuilder:
             4.08,
             1.31,
             f"{revenue_scale:.0f}x",
-            "2024A–2028E revenue scale",
+            "2024 to 2028 revenue growth",
             accent="orange",
             evidence="EST.",
             value_size=28,
@@ -1553,7 +1573,7 @@ class DeckBuilder:
         rq = self.model.assumptions["revenue_quality"]
         add_text(
             slide,
-            "MONETIZATION MIX",
+            "REVENUE MIX",
             0.65,
             1.76,
             2.0,
@@ -1777,7 +1797,7 @@ class DeckBuilder:
         add_rect(slide, 8.55, 4.86, 4.13, 1.30, fill="ink", radius=True)
         add_text(
             slide,
-            "Expansion vectors",
+            "How accounts grow",
             8.88,
             5.10,
             2.10,
@@ -1799,7 +1819,7 @@ class DeckBuilder:
         add_rect(slide, 0.65, 6.28, 12.03, 0.24, fill="orange", radius=True)
         add_text(
             slide,
-            "Retention is the highest-priority diligence gap; all cohort and retention data shown here are modeled estimates pending company data.",
+            "Retention is the main diligence gap. The cohort and retention data are estimates until the company provides actual data.",
             0.88,
             6.31,
             11.55,
@@ -1828,6 +1848,16 @@ class DeckBuilder:
         add_tag(slide, "PUBLIC CASE STUDY", 3.80, 2.07, fill="orange", color="white", width=1.48)
         add_text(
             slide,
+            "HR and workforce software | 16,000+ employees",
+            1.02,
+            2.47,
+            3.90,
+            0.24,
+            font_size=8,
+            color="gray_300",
+        )
+        add_text(
+            slide,
             f"{anchors['ukg_feedback_capacity_multiple']:.0%}",
             0.98,
             2.82,
@@ -1850,7 +1880,7 @@ class DeckBuilder:
         )
         add_text(
             slide,
-            "UKG embedded its design language into a reusable prototype framework, enabling product and UX teams to create functional AI prototypes in days—not weeks.",
+            "UKG built a reusable prototype system in Replit. Product and design teams now create working AI prototypes in days instead of weeks.",
             1.02,
             4.18,
             4.18,
@@ -1860,18 +1890,18 @@ class DeckBuilder:
         )
         add_text(
             slide,
-            f"{anchors['ukg_employees']:,.0f}+ employees",
+            "Rapid prototypes | Product work | Internal tools",
             1.02,
             5.62,
-            1.85,
+            3.95,
             0.30,
-            font_size=10,
+            font_size=8,
             color="coral",
             bold=True,
         )
         add_text(
             slide,
-            "rapid prototyping • product development • internal tools",
+            "Source: Replit customer case study",
             1.02,
             6.02,
             3.98,
@@ -1974,7 +2004,7 @@ class DeckBuilder:
             ("CORE", "Convert", "plans + credits", "blue", 6.30),
             ("TEAMS", "Expand", "collaboration", "coral", 5.60),
             ("ENTERPRISE", "Commit", "committed usage", "green", 4.90),
-            ("RUNTIME", "Compound", "deploy + operate", "charcoal", 4.20),
+            ("RUNTIME", "Grow", "deploy + operate", "charcoal", 4.20),
         ]
         x = 0.65
         for index, (stage, action, detail, color, width) in enumerate(stages):
@@ -2019,7 +2049,7 @@ class DeckBuilder:
         add_rect(slide, 8.34, 1.72, 4.34, 4.80, fill="white", line="gray_200", radius=True)
         add_text(
             slide,
-            "MONETIZATION VECTORS",
+            "REVENUE SOURCES",
             8.69,
             2.02,
             3.65,
@@ -2228,7 +2258,7 @@ class DeckBuilder:
         add_rect(slide, 0.65, 4.86, 12.03, 1.63, fill="ink", radius=True)
         add_text(
             slide,
-            "PLG distribution lowers acquisition cost",
+            "Product-led growth lowers acquisition cost",
             0.98,
             5.17,
             3.42,
@@ -2250,7 +2280,7 @@ class DeckBuilder:
         )
         add_text(
             slide,
-            "Runtime compounds expansion",
+            "Runtime increases account spend",
             8.83,
             5.17,
             3.10,
@@ -2274,7 +2304,7 @@ class DeckBuilder:
         )
         add_text(
             slide,
-            "Intent data → account prioritization",
+            "Usage signals identify the best accounts",
             4.88,
             5.82,
             3.42,
@@ -2480,7 +2510,7 @@ class DeckBuilder:
         add_rect(slide, 7.74, 1.72, 4.94, 0.46, fill="orange", radius=True)
         add_text(
             slide,
-            "Replit: broad audience + complete creation-to-runtime stack",
+            "Replit serves more users and covers the full workflow",
             7.90,
             1.83,
             4.62,
@@ -2513,8 +2543,8 @@ class DeckBuilder:
         moat = [
             ("Distribution", "50M+ users lower acquisition cost", "orange", (0.65, 1.72)),
             ("Workflow data", "Plans, edits, tests, and repairs improve agents", "blue", (8.86, 1.72)),
-            ("Runtime", "Deployed workloads expand monetization and feedback", "coral", (0.65, 4.62)),
-            ("Ecosystem", "Enterprise systems make Replit more useful", "green", (8.86, 4.62)),
+            ("Runtime", "Deployed apps add revenue and product data", "coral", (0.65, 4.62)),
+            ("Integrations", "Enterprise systems make Replit more useful", "green", (8.86, 4.62)),
             ("Governance", "Identity and policy increase switching cost", "charcoal", (4.70, 5.32)),
         ]
         for index, (title, body, color, (x, y)) in enumerate(moat, 1):
@@ -2568,155 +2598,118 @@ class DeckBuilder:
     def _slide_23_historical_financials(self) -> None:
         slide = self._new_slide(23)
         financials = self.model.financials
-        years = [2023, 2024, 2025, 2026]
+        years = list(range(2025, 2032))
         metrics = [
-            ("Revenue", "revenue", "$M", "$"),
-            ("YoY growth", "revenue_growth", "%", "%"),
-            ("Gross margin", "gross_margin", "%", "%"),
-            ("Adj. op. income", "adjusted_operating_income", "$M", "$"),
-            ("Free cash flow", "free_cash_flow", "$M", "$"),
+            ("Revenue", "revenue", "money"),
+            ("Growth", "revenue_growth", "percent"),
+            ("Gross profit", "gross_profit", "money"),
+            ("Gross margin", "gross_margin", "percent"),
+            ("R&D", "r_and_d", "money"),
+            ("Sales and marketing", "sales_and_marketing", "money"),
+            ("G&A", "g_and_a", "money"),
+            ("Adjusted operating income", "adjusted_operating_income", "money"),
+            ("Adjusted operating margin", "adjusted_operating_margin", "percent"),
+            ("Free cash flow", "free_cash_flow", "money"),
         ]
-        table_x, table_y = 0.65, 1.76
-        label_w, col_w, row_h = 3.02, 1.35, 0.70
-        add_rect(slide, table_x, table_y, label_w + col_w * 4, 0.70, fill="ink", radius=True)
+        table_x, table_y = 0.65, 1.72
+        label_w = 2.40
+        col_w = (12.03 - label_w) / len(years)
+        header_h = 0.52
+        row_h = 0.38
+        add_rect(
+            slide,
+            table_x,
+            table_y,
+            label_w + col_w * len(years),
+            header_h,
+            fill="ink",
+            radius=True,
+        )
         add_text(
             slide,
-            "Illustrative financials",
+            "P&L MODEL",
             table_x + 0.22,
-            table_y + 0.22,
+            table_y + 0.16,
             label_w - 0.35,
             0.24,
-            font_size=9,
+            font_size=8,
             color="white",
             bold=True,
+            font_name=FONT_MONO,
         )
         for index, year in enumerate(years):
             add_text(
                 slide,
-                str(year) + ("E" if year == 2026 else "A"),
+                f"{year}E",
                 table_x + label_w + index * col_w,
-                table_y + 0.22,
+                table_y + 0.16,
                 col_w,
                 0.24,
-                font_size=9,
-                color="white",
-                bold=True,
-                align=PP_ALIGN.CENTER,
-            )
-        for row_index, (label, column, _, fmt) in enumerate(metrics):
-            y = table_y + 0.70 + row_index * row_h
-            fill = "white" if row_index % 2 == 0 else "gray_100"
-            add_rect(slide, table_x, y, label_w + col_w * 4, row_h, fill=fill)
-            add_text(
-                slide,
-                label,
-                table_x + 0.22,
-                y + 0.21,
-                label_w - 0.35,
-                0.24,
-                font_size=9,
-                color="ink",
-                bold=True,
-            )
-            for year_index, year in enumerate(years):
-                value = financials.loc[year, column]
-                if fmt == "%":
-                    display = "—" if value != value else f"{value:.0%}"
-                else:
-                    display = f"${value:,.0f}"
-                add_text(
-                    slide,
-                    display,
-                    table_x + label_w + year_index * col_w,
-                    y + 0.21,
-                    col_w,
-                    0.24,
-                    font_size=9,
-                    color="orange" if year == 2026 else "ink",
-                    bold=year == 2026,
-                    align=PP_ALIGN.CENTER,
-                )
-        add_tag(slide, "EST.", 8.39, 5.90, width=0.62)
-
-        add_rect(slide, 9.15, 1.76, 3.53, 4.14, fill="white", line="gray_200", radius=True)
-        add_text(
-            slide,
-            "INFLECTION",
-            9.49,
-            2.06,
-            2.84,
-            0.24,
-            font_size=8,
-            color="orange",
-            bold=True,
-            font_name=FONT_MONO,
-            align=PP_ALIGN.CENTER,
-        )
-        bridge = [
-            ("Scale", "Revenue absorbs fixed platform costs", "orange"),
-            ("Mix", "Enterprise and runtime expand", "blue"),
-            ("Efficiency", "Compute per successful build falls", "coral"),
-        ]
-        for index, (title, body, color) in enumerate(bridge):
-            y = 2.57 + index * 0.96
-            add_circle(slide, 9.48, y, 0.44, fill=color)
-            add_text(
-                slide,
-                str(index + 1),
-                9.48,
-                y,
-                0.44,
-                0.44,
                 font_size=8,
                 color="white",
                 bold=True,
                 align=PP_ALIGN.CENTER,
-                valign=MSO_ANCHOR.MIDDLE,
+            )
+        for row_index, (label, column, fmt) in enumerate(metrics):
+            y = table_y + header_h + row_index * row_h
+            fill = "white" if row_index % 2 == 0 else "gray_100"
+            add_rect(
+                slide,
+                table_x,
+                y,
+                label_w + col_w * len(years),
+                row_h,
+                fill=fill,
             )
             add_text(
                 slide,
-                title,
-                10.08,
-                y - 0.02,
-                1.15,
-                0.22,
-                font_size=9,
+                label,
+                table_x + 0.22,
+                y + 0.09,
+                label_w - 0.35,
+                0.24,
+                font_size=8,
                 color="ink",
-                bold=True,
+                bold=row_index in (0, 2, 7, 9),
             )
-            add_text(
-                slide,
-                body,
-                10.08,
-                y + 0.25,
-                2.12,
-                0.38,
-                font_size=7.5,
-                color="gray_700",
-            )
-        add_rect(slide, 9.47, 5.42, 2.88, 0.25, fill="orange", radius=True)
+            for year_index, year in enumerate(years):
+                value = financials.loc[year, column]
+                if fmt == "percent":
+                    display = "n/a" if value != value else f"{value:.0%}"
+                else:
+                    display = (
+                        f"(${abs(value):,.0f})" if value < 0 else f"${value:,.0f}"
+                    )
+                value_color = (
+                    "orange"
+                    if column in ("adjusted_operating_income", "free_cash_flow")
+                    and value > 0
+                    else "ink"
+                )
+                add_text(
+                    slide,
+                    display,
+                    table_x + label_w + year_index * col_w,
+                    y + 0.09,
+                    col_w,
+                    0.24,
+                    font_size=7.5,
+                    color=value_color,
+                    bold=row_index in (0, 2, 7, 9),
+                    align=PP_ALIGN.CENTER,
+                )
+        add_tag(slide, "EST.", 11.85, 1.82, width=0.62)
+        add_rect(slide, 0.65, 6.16, 12.03, 0.36, fill="orange", radius=True)
         add_text(
             slide,
-            "Gross margin: (10%) → 46%",
-            9.47,
-            5.45,
-            2.88,
-            0.18,
-            font_size=7,
-            color="white",
-            bold=True,
-            align=PP_ALIGN.CENTER,
-        )
-        add_rect(slide, 0.65, 6.16, 12.03, 0.36, fill="gray_100", radius=True)
-        add_text(
-            slide,
-            "Public revenue disclosures are limited; the sourcebook documents the public anchors and all intervening analyst estimates.",
+            "Adjusted operating income and free cash flow turn positive in 2028.",
             0.90,
             6.23,
             11.55,
             0.20,
-            font_size=7.8,
-            color="gray_700",
+            font_size=8.5,
+            color="white",
+            bold=True,
             align=PP_ALIGN.CENTER,
         )
 
@@ -2734,9 +2727,9 @@ class DeckBuilder:
         add_stacked_columns(
             slide,
             0.65,
-            1.78,
+            2.10,
             7.60,
-            4.55,
+            4.23,
             [str(year) + "E" for year in years],
             [
                 {
@@ -2760,9 +2753,9 @@ class DeckBuilder:
         )
         add_text(
             slide,
-            "BASE-CASE REVENUE",
+            "REVENUE BY SOURCE, $M",
             0.80,
-            1.78,
+            1.72,
             2.25,
             0.22,
             font_size=8,
@@ -2770,11 +2763,22 @@ class DeckBuilder:
             bold=True,
             font_name=FONT_MONO,
         )
-        add_tag(slide, "EST.", 7.35, 1.79, width=0.62)
+        add_chart_legend(
+            slide,
+            [
+                ("Individual", "orange"),
+                ("Enterprise", "blue"),
+                ("Agent use and hosting", "coral"),
+            ],
+            2.62,
+            1.73,
+            item_width=1.62,
+        )
+        add_tag(slide, "EST.", 7.35, 1.73, width=0.62)
 
         metrics = [
             (f"${financials.loc[2031, 'revenue'] / 1000:.2f}B", "2031E revenue", "orange"),
-            (f"{revenue_cagr:.0%}", "2026E–2031E CAGR", "blue"),
+            (f"{revenue_cagr:.0%}", "2026 to 2031 CAGR", "blue"),
             (f"{financials.loc[2031, 'gross_margin']:.0%}", "2031E gross margin", "coral"),
             (f"{financials.loc[2031, 'international_revenue_share']:.0%}", "2031E international mix", "green"),
         ]
@@ -2848,7 +2852,7 @@ class DeckBuilder:
         add_rect(slide, 8.34, 1.78, 4.34, 4.60, fill="white", line="gray_200", radius=True)
         add_text(
             slide,
-            "VALUE-CREATION BRIDGE",
+            "MARGIN DRIVERS",
             8.68,
             2.08,
             3.66,
@@ -2862,7 +2866,7 @@ class DeckBuilder:
         drivers = [
             ("+30 pts", "Gross-margin expansion", "orange"),
             ("+11 pts", "Sales productivity", "blue"),
-            ("+9 pts", "G&A leverage", "coral"),
+            ("+9 pts", "G&A efficiency", "coral"),
             ("(4) pts", "Ongoing R&D reinvestment", "green"),
         ]
         for index, (value, label, color) in enumerate(drivers):
@@ -2917,6 +2921,14 @@ class DeckBuilder:
         slide = self._new_slide(26)
         uses = self.model.use_of_proceeds
         tx = self.model.transaction
+        short_labels = {
+            "Model training and infrastructure": "Model training",
+            "Enterprise expansion": "Enterprise sales",
+            "User growth": "User growth",
+            "International expansion": "International",
+            "Talent and research": "Talent and research",
+            "Execution reserve": "Reserve",
+        }
         add_text(
             slide,
             "PRIMARY CAPITAL",
@@ -2934,12 +2946,12 @@ class DeckBuilder:
             0.65,
             2.15,
             7.00,
-            uses["category"].tolist(),
+            [short_labels[value] for value in uses["category"]],
             uses["amount"].tolist(),
             uses["color"].tolist(),
-            max_value=250,
+            max_value=230,
             value_format="${:,.0f}M",
-            row_height=0.72,
+            row_height=0.65,
         )
         add_tag(slide, "EST.", 7.05, 2.17, width=0.62)
 
@@ -2968,133 +2980,221 @@ class DeckBuilder:
             bold=True,
             align=PP_ALIGN.CENTER,
         )
-        add_line(slide, 8.67, 3.55, 12.09, 3.55, color="charcoal", width=1)
         add_text(
             slide,
-            f"${tx['secondary']:.0f}M",
+            "WHAT THE CAPITAL FUNDS",
             8.48,
-            3.96,
+            3.40,
             3.80,
-            0.58,
-            font_size=32,
+            0.24,
+            font_size=8,
+            color="orange",
+            bold=True,
+            align=PP_ALIGN.CENTER,
+            font_name=FONT_MONO,
+        )
+        add_bullet_list(
+            slide,
+            [
+                "65% lower compute cost per successful build",
+                "4,200 enterprise customers",
+                "Local infrastructure, sales, and compliance in Europe, India, and the Middle East",
+                "100M users and 5M paid users",
+                "Model, security, product, and sales leaders",
+            ],
+            8.62,
+            3.82,
+            3.50,
+            font_size=8,
+            color="gray_300",
+            row_height=0.38,
+        )
+        add_line(slide, 8.67, 5.78, 12.09, 5.78, color="charcoal", width=1)
+        add_text(
+            slide,
+            f"${tx['secondary']:.0f}M secondary",
+            8.48,
+            5.92,
+            2.10,
+            0.26,
+            font_size=11,
             color="coral",
             bold=True,
-            align=PP_ALIGN.CENTER,
+            align=PP_ALIGN.LEFT,
         )
         add_text(
             slide,
-            "targeted secondary liquidity",
-            8.48,
-            4.58,
-            3.80,
-            0.30,
-            font_size=11,
+            "No cash to the company",
+            10.45,
+            5.93,
+            1.48,
+            0.24,
+            font_size=8,
             color="gray_300",
+        )
+
+    def _slide_27_milestones(self) -> None:
+        slide = self._new_slide(27)
+        cash = self.model.monthly_cash_flow.loc[
+            : self.model.cash_summary["ipo_target_date"]
+        ]
+        summary = self.model.cash_summary
+        labels = [date.strftime("%b-%y") for date in cash.index]
+        no_series_e = [
+            value if date <= summary["funding_need_date"] else None
+            for date, value in cash["ending_cash_without_series_e"].items()
+        ]
+        add_text(
+            slide,
+            "ENDING CASH BY MONTH, $M",
+            0.78,
+            1.72,
+            2.65,
+            0.22,
+            font_size=8,
+            color="gray_700",
             bold=True,
-            align=PP_ALIGN.CENTER,
+            font_name=FONT_MONO,
+        )
+        add_native_line_chart(
+            slide,
+            0.65,
+            2.04,
+            8.10,
+            4.05,
+            labels,
+            [
+                {
+                    "name": "Base with Series E",
+                    "values": cash["ending_cash"].tolist(),
+                    "color": "orange",
+                    "end_label": f"${cash['ending_cash'].iloc[-1]:,.0f}M",
+                },
+                {
+                    "name": "Downside with Series E",
+                    "values": cash["ending_cash_downside"].tolist(),
+                    "color": "coral",
+                    "end_label": f"${cash['ending_cash_downside'].iloc[-1]:,.0f}M",
+                },
+                {
+                    "name": "No Series E",
+                    "values": no_series_e,
+                    "color": "gray_500",
+                    "end_label": f"Below ${summary['minimum_cash']:.0f}M",
+                },
+                {
+                    "name": "Minimum cash",
+                    "values": cash["minimum_cash"].tolist(),
+                    "color": "orange_dark",
+                    "end_label": f"${summary['minimum_cash']:.0f}M",
+                    "dash": True,
+                    "width": 1.2,
+                },
+            ],
+            min_value=0,
+            max_value=3000,
+            y_format="${:,.0f}",
+            x_label_every=6,
+            show_markers=False,
+        )
+        plot_left = 1.13
+        plot_width = 7.38
+        funding_index = cash.index.get_loc(summary["financing_close_date"])
+        funding_x = plot_left + funding_index * plot_width / (len(cash) - 1)
+        add_line(
+            slide,
+            funding_x,
+            2.39,
+            funding_x,
+            5.69,
+            color="orange_dark",
+            width=1.1,
+            dash=True,
         )
         add_text(
             slide,
-            "Separate from use of proceeds",
-            8.48,
-            5.20,
-            3.80,
-            0.25,
-            font_size=8.5,
-            color="gray_300",
-            align=PP_ALIGN.CENTER,
-        )
-        add_rect(slide, 8.70, 5.70, 3.36, 0.34, fill="charcoal", radius=True)
-        add_text(
-            slide,
-            "Liquidity supports retention and ownership transition",
-            8.70,
-            5.77,
-            3.36,
+            f"{summary['financing_close_date'].strftime('%b-%y')} funding",
+            funding_x + 0.08,
+            6.05,
+            1.05,
             0.20,
+            font_size=6.5,
+            color="orange_dark",
+            bold=True,
+        )
+        ipo_x = plot_left + plot_width
+        add_line(
+            slide,
+            ipo_x,
+            2.39,
+            ipo_x,
+            5.69,
+            color="orange",
+            width=1.1,
+            dash=True,
+        )
+        add_text(
+            slide,
+            "H2-30 IPO",
+            ipo_x - 0.78,
+            6.05,
+            0.75,
+            0.20,
+            font_size=6.5,
+            color="orange",
+            bold=True,
+            align=PP_ALIGN.RIGHT,
+        )
+        add_tag(slide, "MONTHLY MODEL", 7.43, 1.72, width=1.18)
+
+        cards = [
+            (
+                f"${summary['beginning_cash']:.0f}M",
+                "Cash at Sep-26",
+                "orange",
+            ),
+            (
+                summary["funding_need_date"].strftime("%b-%y"),
+                f"Below ${summary['minimum_cash']:.0f}M without the round",
+                "blue",
+            ),
+            (
+                "No round",
+                "Further equity before IPO in base case",
+                "coral",
+            ),
+            (
+                summary["ipo_target_date"].strftime("H2 %Y"),
+                "Target IPO window",
+                "green",
+            ),
+        ]
+        for index, (value, label, color) in enumerate(cards):
+            add_metric_card(
+                slide,
+                9.10,
+                1.72 + index * 1.13,
+                3.58,
+                0.95,
+                value,
+                label,
+                accent=color,
+                evidence="EST.",
+                value_size=18,
+            )
+        add_rect(slide, 9.10, 6.27, 3.58, 0.25, fill="orange", radius=True)
+        add_text(
+            slide,
+            "The base and downside cases fund the company through the IPO target.",
+            9.10,
+            6.30,
+            3.58,
+            0.18,
             font_size=7,
             color="white",
             bold=True,
             align=PP_ALIGN.CENTER,
         )
-
-    def _slide_27_milestones(self) -> None:
-        slide = self._new_slide(27)
-        financials = self.model.financials
-        milestones = [
-            (
-                "2027",
-                f"${financials.loc[2027, 'revenue'] / 1000:.2f}B revenue",
-                f"{financials.loc[2027, 'enterprise_customers']:,.0f} enterprise customers",
-                f"{financials.loc[2027, 'gross_margin']:.0%} GM",
-                "orange",
-            ),
-            (
-                "2028",
-                f"{financials.loc[2028, 'registered_users_m']:.0f}M users",
-                f"${financials.loc[2028, 'revenue'] / 1000:.2f}B revenue",
-                "Positive FCF",
-                "blue",
-            ),
-            (
-                "2029",
-                f"${financials.loc[2029, 'revenue'] / 1000:.1f}B+ revenue",
-                f"{financials.loc[2029, 'enterprise_customers']:,.0f} enterprise customers",
-                f"{financials.loc[2029, 'international_revenue_share']:.0%} international",
-                "coral",
-            ),
-            (
-                "2030",
-                f"${financials.loc[2030, 'revenue'] / 1000:.1f}B revenue",
-                f"{financials.loc[2030, 'free_cash_flow_margin']:.0%} FCF margin",
-                "IPO-ready controls",
-                "green",
-            ),
-        ]
-        add_line(slide, 1.10, 3.16, 12.02, 3.16, color="gray_300", width=2)
-        for index, (year, item1, item2, item3, color) in enumerate(milestones):
-            x = 0.65 + index * 3.04
-            add_circle(slide, x + 1.18, 2.62, 1.08, fill=color)
-            add_text(
-                slide,
-                year,
-                x + 1.18,
-                2.62,
-                1.08,
-                1.08,
-                font_size=13,
-                color="white",
-                bold=True,
-                align=PP_ALIGN.CENTER,
-                valign=MSO_ANCHOR.MIDDLE,
-                font_name=FONT_MONO,
-            )
-            add_rect(slide, x, 4.04, 2.60, 1.74, fill="white", line="gray_200", radius=True)
-            add_bullet_list(
-                slide,
-                [item1, item2, item3],
-                x + 0.22,
-                4.34,
-                2.14,
-                font_size=8.1,
-                color="ink",
-                bullet_color=color,
-                row_height=0.43,
-            )
-        add_rect(slide, 0.65, 1.72, 12.03, 0.48, fill="ink", radius=True)
-        add_text(
-            slide,
-            "Series E capital carries the company from hypergrowth proof to repeatable, public-market operating discipline.",
-            0.90,
-            1.83,
-            11.55,
-            0.25,
-            font_size=9.4,
-            color="white",
-            bold=True,
-            align=PP_ALIGN.CENTER,
-        )
-        add_tag(slide, "EST.", 12.01, 5.93, width=0.62)
 
     def _slide_28_leadership(self) -> None:
         slide = self._new_slide(28)
@@ -3165,7 +3265,7 @@ class DeckBuilder:
             ("Financial rigor", "Segment ownership, forecasting cadence, and unit-economics accountability.", "orange"),
             ("Enterprise execution", "Scaled field leadership, partner motion, and customer-success depth.", "blue"),
             ("Global operations", "Regional product, infrastructure, compliance, and market leadership.", "coral"),
-            ("Governance", "Independent board depth, audit readiness, risk, security, and compensation systems.", "green"),
+            ("Governance", "Add independent directors, audit systems, risk controls, security controls, and compensation processes.", "green"),
         ]
         for index, (title, body, color) in enumerate(priorities):
             row = index % 2
@@ -3224,7 +3324,7 @@ class DeckBuilder:
         slide = self._new_slide(29)
         rows = [
             ("Model dependency & cost", "High", "Medium", "Routing, proprietary training, capacity contracts, price-to-value controls"),
-            ("Category competition", "High", "Medium", "Own full workflow, runtime, collaboration, and distribution—not one feature"),
+            ("Category competition", "High", "Medium", "Own the workflow, runtime, collaboration, and distribution"),
             ("Code quality & security", "High", "Medium", "Automated testing, Security Agent, policy, auditability, human review"),
             ("Enterprise conversion", "Medium", "Medium", "Self-serve land, field overlay, partners, customer success, governance"),
             ("Growth concentration", "Medium", "Low", "Diversified users, low estimated account concentration, global expansion"),
@@ -3284,7 +3384,7 @@ class DeckBuilder:
         add_rect(slide, 0.65, 6.44, 12.03, 0.08, fill="orange", radius=True)
         add_text(
             slide,
-            "Underwriting stance: the plan assumes competition intensifies and compute remains strategic—not that either disappears.",
+            "The plan assumes stronger competition and continued model cost pressure.",
             0.88,
             6.16,
             11.55,
@@ -3339,14 +3439,14 @@ class DeckBuilder:
             ("02", "Integrated platform", "Agent, workspace, cloud, and governance.", "blue"),
             (
                 "03",
-                "Expanding economics",
-                f"Scale and efficiency drive {financials.loc[2031, 'gross_margin']:.0%} gross margin.",
+                "Improving margins",
+                f"Lower model cost and operating scale produce {financials.loc[2031, 'gross_margin']:.0%} gross margin.",
                 "coral",
             ),
             (
                 "04",
-                "Large outcome",
-                f"${total_tam / 1000:.0f}B TAM with multiple monetization engines.",
+                "Large market",
+                f"${total_tam / 1000:.0f}B TAM with several revenue sources.",
                 "green",
             ),
         ]
@@ -3400,7 +3500,7 @@ class DeckBuilder:
         )
         add_text(
             slide,
-            "accelerates adoption, model capability, enterprise scale, and international expansion",
+            "funds model training, user growth, enterprise sales, international expansion, and talent",
             3.42,
             5.91,
             8.55,

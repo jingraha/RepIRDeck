@@ -101,6 +101,34 @@ def validate_inputs(
         < model.scenarios["upside"].loc[2031, "revenue"],
         "Scenario revenue ordering is invalid",
     )
+    _assert(
+        model.monthly_cash_flow["primary_financing"].sum()
+        == transaction["primary"],
+        "Monthly cash flow must include the primary financing once",
+    )
+    _assert(
+        model.cash_summary["funding_need_date"] is not None,
+        "The no-financing case must show a funding need",
+    )
+    _assert(
+        model.cash_summary["minimum_base_cash"]
+        >= model.cash_summary["minimum_cash"],
+        "Base cash falls below the minimum operating cash level",
+    )
+    _assert(
+        model.cash_summary["minimum_downside_cash"]
+        >= model.cash_summary["minimum_cash"],
+        "Downside cash falls below the minimum operating cash level",
+    )
+    _assert(
+        model.balance_sheet["balance_check"].abs().max() < 0.000001,
+        "Balance sheet does not balance",
+    )
+    _assert(
+        model.cash_flow_statement.loc[2026, "ending_cash"]
+        == model.monthly_cash_flow.loc["2026-12-31", "ending_cash"],
+        "Monthly cash flow does not tie to annual cash flow",
+    )
 
 
 def validate_outputs(

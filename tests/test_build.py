@@ -22,9 +22,20 @@ def test_build_outputs(tmp_path) -> None:
     assert "$20.8B" in slide_text[2]
     assert "73x" in slide_text[13]
     assert "52%" in slide_text[24]
-    assert "27% FCF margin" in slide_text[27]
+    assert "Nov-26" in slide_text[27]
+    assert "H2 2030" in slide_text[27]
 
     workbook = load_workbook(xlsx_path, read_only=True, data_only=False)
     assert workbook.sheetnames == SHEET_NAMES
+    assert workbook.sheetnames[:5] == [
+        "Assumptions",
+        "Visuals",
+        "P&L",
+        "Cash Flow",
+        "Balance Sheet",
+    ]
+    assert workbook["Cash Flow"]["A1"].value == "Cash Flow"
+    assert workbook["Cash Flow"]["B5"].value == "='P&L'!B15"
+    assert workbook["Balance Sheet"]["B5"].value == "='Cash Flow'!B16"
     assert workbook["QA Checks"]["D5"].value == "PASS"
     workbook.close()

@@ -46,3 +46,31 @@ def test_market_sums_to_250_billion() -> None:
     model = build_model()
     assert model.market["tam"].sum() == 250_000
     assert model.market["sam"].sum() == 90_000
+
+
+def test_monthly_cash_model_shows_funding_need_and_runway() -> None:
+    model = build_model()
+    assert model.cash_summary["funding_need_date"].strftime("%Y-%m") == "2026-11"
+    assert (
+        model.monthly_cash_flow["primary_financing"].sum()
+        == model.transaction["primary"]
+    )
+    assert model.cash_summary["minimum_base_cash"] >= model.cash_summary["minimum_cash"]
+    assert (
+        model.cash_summary["minimum_downside_cash"]
+        >= model.cash_summary["minimum_cash"]
+    )
+    assert model.cash_summary["next_equity_need"] == "None before IPO in the base case"
+
+
+def test_three_statements_reconcile() -> None:
+    model = build_model()
+    assert model.balance_sheet["balance_check"].abs().max() < 0.000001
+    assert (
+        model.cash_flow_statement.loc[2026, "ending_cash"]
+        == model.monthly_cash_flow.loc["2026-12-31", "ending_cash"]
+    )
+    assert (
+        model.cash_flow_statement["ending_cash"]
+        == model.balance_sheet["cash"]
+    ).all()

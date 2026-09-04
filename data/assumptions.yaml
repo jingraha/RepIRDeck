@@ -124,31 +124,50 @@ market:
       color: charcoal
 
 use_of_proceeds:
-  - category: Individual adoption
-    amount: 240
-    percent: 0.30
-    milestone: 100M registered users and 5M paid individuals
+  - category: Model training and infrastructure
+    amount: 220
+    percent: 0.275
+    milestone: Train Replit models and cut compute cost per successful build by 65%
     color: orange
-  - category: Model and infrastructure
-    amount: 240
-    percent: 0.30
-    milestone: 65% lower compute cost per successful build
-    color: blue
   - category: Enterprise expansion
-    amount: 180
-    percent: 0.225
-    milestone: 4,200 enterprise customers and 94% GRR
+    amount: 160
+    percent: 0.20
+    milestone: Reach 4,200 enterprise customers and 94% gross retention
+    color: blue
+  - category: User growth
+    amount: 140
+    percent: 0.175
+    milestone: Reach 100M registered users and 5M paid individuals
     color: coral
   - category: International expansion
-    amount: 100
-    percent: 0.125
-    milestone: 44% international revenue mix
+    amount: 120
+    percent: 0.15
+    milestone: Add local infrastructure, sales, and compliance in Europe, India, and the Middle East
     color: green
+  - category: Talent and research
+    amount: 120
+    percent: 0.15
+    milestone: Hire model, security, enterprise, and international leaders
+    color: orange_mid
   - category: Execution reserve
     amount: 40
     percent: 0.05
-    milestone: Balance-sheet and strategic flexibility
+    milestone: Keep at least $250M of operating cash
     color: gray_500
+
+cash:
+  as_of_date: "2026-09-30"
+  beginning_cash: 273.6
+  minimum_cash: 250
+  financing_close_date: "2026-11-30"
+  financing_fees: 30
+  ipo_target_date: "2030-09-30"
+  monthly_start: "2026-10-31"
+  monthly_end: "2031-12-31"
+  beginning_cash_2025: 40
+  prior_financing_by_year:
+    2025: 250
+    2026: 400
 
 scenarios:
   downside:

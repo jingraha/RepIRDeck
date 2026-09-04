@@ -13,8 +13,8 @@ python -m src.build
 
 Outputs:
 
-- `output/replit_series_e_investor_deck.pptx`
-- `output/replit_series_e_sourcebook.xlsx`
+- `output/replit_series_e_investor_deck_v2.pptx`
+- `output/replit_series_e_sourcebook_v2.xlsx`
 
 ## Update assumptions or evidence
 
@@ -33,6 +33,16 @@ Outputs:
 | MT | Forward-looking management target |
 
 Every headline metric is listed in the sourcebook's `Slide Reconciliation` tab. Public URLs and claim-level evidence are available in `Source Register` and `Public Facts`.
+
+The first five workbook tabs are:
+
+1. `Assumptions`
+2. `Visuals`
+3. `P&L`
+4. `Cash Flow`
+5. `Balance Sheet`
+
+The cash-flow tab includes an annual cash-flow statement and a monthly runway from October 2026 through December 2031.
 
 ## Validation
 

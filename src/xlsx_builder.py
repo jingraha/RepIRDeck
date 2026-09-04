@@ -7,28 +7,33 @@ from typing import Any
 import pandas as pd
 from openpyxl import Workbook
 from openpyxl.chart import LineChart, Reference
+from openpyxl.drawing.image import Image as XLImage
 from openpyxl.formatting.rule import CellIsRule
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.dimensions import ColumnDimension
 
-from .config import COLORS, XLSX_PATH
+from .charts import render_workbook_charts
+from .config import COLORS, OUTPUT_DIR, XLSX_PATH
 from .model import ModelBundle
 from .sources import Source, source_rows
 
 
 SHEET_NAMES = [
+    "Assumptions",
+    "Visuals",
+    "P&L",
+    "Cash Flow",
+    "Balance Sheet",
     "Read Me",
     "Source Register",
     "Public Facts",
-    "Assumptions",
     "Historical KPIs",
     "Revenue Build",
     "Cohorts & Retention",
     "Unit Economics",
     "GTM & Pipeline",
     "Market Model",
-    "P&L and Cash Flow",
     "Scenarios",
     "Use of Proceeds",
     "Valuation",
@@ -40,11 +45,11 @@ SHEET_NAMES = [
 ORANGE_FILL = PatternFill("solid", fgColor=COLORS["orange"])
 DARK_FILL = PatternFill("solid", fgColor=COLORS["ink"])
 CREAM_FILL = PatternFill("solid", fgColor=COLORS["cream"])
-BLUE_FILL = PatternFill("solid", fgColor="DDEEFF")
+BLUE_FILL = PatternFill("solid", fgColor=COLORS["orange_pale"])
 ESTIMATE_FILL = PatternFill("solid", fgColor="FFF0E7")
 GRAY_FILL = PatternFill("solid", fgColor=COLORS["gray_100"])
-GREEN_FILL = PatternFill("solid", fgColor="E5F3EC")
-RED_FILL = PatternFill("solid", fgColor="FCE8E6")
+GREEN_FILL = PatternFill("solid", fgColor="FFE9DF")
+RED_FILL = PatternFill("solid", fgColor="FFD4C2")
 WHITE_FONT = Font(name="Arial", size=10, bold=True, color=COLORS["white"])
 HEADER_FONT = Font(name="Arial", size=10, bold=True, color=COLORS["ink"])
 BODY_FONT = Font(name="Arial", size=9, color=COLORS["charcoal"])
@@ -170,10 +175,10 @@ def _read_me_sheet(
         legend_row,
         ["Evidence class", "Meaning", "Workbook color"],
         [
-            ("Public fact", "Direct or attributable public disclosure", "Blue"),
+            ("Public fact", "Direct or attributable public disclosure", "Light orange"),
             ("Derived", "Arithmetic based on public facts", "Gray"),
             ("Est.", "Analyst estimate based on stated assumptions", "Orange"),
-            ("Management target", "Forward-looking goal stated by management", "Green"),
+            ("Management target", "Forward-looking goal stated by management", "Dark orange"),
         ],
     )
     fills = [BLUE_FILL, GRAY_FILL, ESTIMATE_FILL, GREEN_FILL]
@@ -322,7 +327,7 @@ def _assumptions_sheet(
     start = _sheet_title(
         ws,
         "Assumptions",
-        "Editable structured inputs. Orange rows are analyst assumptions; public anchors are documented separately.",
+        "Editable structured inputs. Orange rows are analyst assumptions. Public anchors are documented separately.",
     )
     flattened = _flatten(model.assumptions)
     rows: list[tuple[Any, ...]] = []
@@ -358,7 +363,7 @@ def _historical_kpis_sheet(
     start = _sheet_title(
         ws,
         "Historical KPIs",
-        "2023–2026 public anchors and internally consistent analyst estimates.",
+        "Public anchors and analyst estimates from 2023 to 2026.",
     )
     metrics = [
         ("Revenue", "revenue", "$M", "$#,##0"),
@@ -400,7 +405,7 @@ def _revenue_build_sheet(
     start = _sheet_title(
         ws,
         "Revenue Build",
-        "Segment model in $M. 2023–2026 are estimated history; 2027–2031 are base-case forecasts.",
+        "Segment model in $M. The 2023 to 2026 periods are estimated history. The forecast starts in 2027.",
     )
     years = list(model.financials.index)
     headers = ["Metric", *years]
@@ -447,6 +452,13 @@ def _revenue_build_sheet(
     )
     chart.add_data(data, titles_from_data=False, from_rows=True)
     chart.set_categories(categories)
+    for series, color in zip(
+        chart.series,
+        ("orange", "orange_mid", "coral"),
+        strict=True,
+    ):
+        series.graphicalProperties.line.solidFill = COLORS[color]
+        series.graphicalProperties.line.width = 22000
     ws.add_chart(chart, f"A{start + 8}")
     _set_widths(ws, {1: 30, **{column: 14 for column in range(2, 11)}})
     return lookup
@@ -518,6 +530,9 @@ def _unit_economics_sheet(
     for row_offset, (_, column, number_format) in enumerate(metrics, 1):
         for year_offset, year in enumerate(years, 2):
             cell = ws.cell(start + row_offset, year_offset)
+            if column == "net_income":
+                operating_income_row = start + 9
+                cell.value = f"={get_column_letter(year_offset)}{operating_income_row}"
             cell.number_format = number_format
             cell.fill = ESTIMATE_FILL
             lookup[f"unit.{column}.{year}"] = (
@@ -627,10 +642,10 @@ def _p_and_l_sheet(
     _prepare_sheet(ws, "A5")
     start = _sheet_title(
         ws,
-        "P&L and Cash Flow",
-        "Adjusted operating model in $M. All periods are analyst estimates; 2027–2031 are forecasts.",
+        "P&L",
+        "Income statement in $M. All periods are analyst estimates.",
     )
-    years = list(model.financials.index)
+    years = list(model.income_statement.index)
     metrics = [
         ("Revenue", "revenue", "$#,##0"),
         ("Growth", "revenue_growth", "0.0%"),
@@ -640,16 +655,13 @@ def _p_and_l_sheet(
         ("R&D", "r_and_d", "$#,##0"),
         ("Sales & marketing", "sales_and_marketing", "$#,##0"),
         ("G&A", "g_and_a", "$#,##0"),
-        ("Adjusted operating income", "adjusted_operating_income", "$#,##0;[Red]($#,##0)"),
-        ("Adjusted operating margin", "adjusted_operating_margin", "0.0%;[Red](0.0%)"),
-        ("Stock compensation", "stock_compensation", "$#,##0"),
-        ("Capital expenditures", "capex", "$#,##0"),
-        ("Working capital change", "working_capital_change", "$#,##0"),
-        ("Free cash flow", "free_cash_flow", "$#,##0;[Red]($#,##0)"),
-        ("Free cash flow margin", "free_cash_flow_margin", "0.0%;[Red](0.0%)"),
+        ("Operating income", "adjusted_operating_income", "$#,##0;[Red]($#,##0)"),
+        ("Operating margin", "adjusted_operating_margin", "0.0%;[Red](0.0%)"),
+        ("Net income", "net_income", "$#,##0;[Red]($#,##0)"),
+        ("Stock compensation included in expenses", "stock_compensation", "$#,##0"),
     ]
     rows = [
-        (label, *model.financials[column].tolist())
+        (label, *model.income_statement[column].tolist())
         for label, column, _ in metrics
     ]
     _write_table(ws, start, ["Metric", *years], rows)
@@ -662,7 +674,7 @@ def _p_and_l_sheet(
             lookup[f"financial.{column}.{year}"] = (
                 f"{_quote_sheet(ws.title)}!${get_column_letter(year_offset)}${start + row_offset}"
             )
-    for row_offset in (1, 4, 9, 14):
+    for row_offset in (1, 4, 9, 11):
         for column in range(1, len(years) + 2):
             ws.cell(start + row_offset, column).font = Font(
                 name="Arial",
@@ -674,6 +686,422 @@ def _p_and_l_sheet(
     return lookup
 
 
+def _cash_flow_sheet(
+    ws: Any,
+    model: ModelBundle,
+) -> dict[str, str]:
+    _prepare_sheet(ws, "A5")
+    start = _sheet_title(
+        ws,
+        "Cash Flow",
+        "Annual cash flow and monthly cash runway in $M.",
+    )
+    annual_metrics = [
+        ("Net income", "net_income", "$#,##0;[Red]($#,##0)"),
+        ("Stock compensation", "stock_compensation", "$#,##0"),
+        ("Change in working capital", "change_in_working_capital", "$#,##0;[Red]($#,##0)"),
+        ("Cash from operations", "cash_from_operations", "$#,##0;[Red]($#,##0)"),
+        ("Capital expenditures", "capital_expenditures", "$#,##0;[Red]($#,##0)"),
+        ("Free cash flow", "free_cash_flow", "$#,##0;[Red]($#,##0)"),
+        ("Prior equity financing", "prior_equity_financing", "$#,##0"),
+        ("Series E primary", "series_e_primary", "$#,##0"),
+        ("Financing fees", "financing_fees", "$#,##0;[Red]($#,##0)"),
+        ("Net change in cash", "net_change_in_cash", "$#,##0;[Red]($#,##0)"),
+        ("Beginning cash", "beginning_cash", "$#,##0"),
+        ("Ending cash", "ending_cash", "$#,##0"),
+    ]
+    years = list(model.cash_flow_statement.index)
+    annual_rows = [
+        (label, *model.cash_flow_statement[column].tolist())
+        for label, column, _ in annual_metrics
+    ]
+    _write_table(ws, start, ["Annual cash flow", *years], annual_rows)
+    lookup: dict[str, str] = {}
+    row_by_metric = {
+        column: start + row_offset
+        for row_offset, (_, column, _) in enumerate(annual_metrics, 1)
+    }
+    pnl_row_by_metric = {
+        "net_income": 15,
+        "stock_compensation": 16,
+    }
+    for row_offset, (_, column, number_format) in enumerate(annual_metrics, 1):
+        for year_offset, year in enumerate(years, 2):
+            cell = ws.cell(start + row_offset, year_offset)
+            column_letter = get_column_letter(year_offset)
+            if column in pnl_row_by_metric:
+                cell.value = (
+                    f"='P&L'!{column_letter}{pnl_row_by_metric[column]}"
+                )
+            elif column == "cash_from_operations":
+                cell.value = (
+                    f"={column_letter}{row_by_metric['net_income']}"
+                    f"+{column_letter}{row_by_metric['stock_compensation']}"
+                    f"+{column_letter}{row_by_metric['change_in_working_capital']}"
+                )
+            elif column == "free_cash_flow":
+                cell.value = (
+                    f"={column_letter}{row_by_metric['cash_from_operations']}"
+                    f"+{column_letter}{row_by_metric['capital_expenditures']}"
+                )
+            elif column == "net_change_in_cash":
+                cell.value = (
+                    f"={column_letter}{row_by_metric['free_cash_flow']}"
+                    f"+{column_letter}{row_by_metric['prior_equity_financing']}"
+                    f"+{column_letter}{row_by_metric['series_e_primary']}"
+                    f"+{column_letter}{row_by_metric['financing_fees']}"
+                )
+            elif column == "beginning_cash" and year_offset > 2:
+                prior_column = get_column_letter(year_offset - 1)
+                cell.value = f"={prior_column}{row_by_metric['ending_cash']}"
+            elif column == "ending_cash":
+                cell.value = (
+                    f"={column_letter}{row_by_metric['beginning_cash']}"
+                    f"+{column_letter}{row_by_metric['net_change_in_cash']}"
+                )
+            cell.number_format = number_format
+            cell.fill = ESTIMATE_FILL
+            lookup[f"cash_flow.{column}.{year}"] = (
+                f"{_quote_sheet(ws.title)}!${get_column_letter(year_offset)}${start + row_offset}"
+            )
+
+    summary = model.cash_summary
+    summary_start = start + len(annual_metrics) + 3
+    summary_rows = [
+        ("Cash at September 2026", summary["beginning_cash"], "Est."),
+        ("Minimum operating cash", summary["minimum_cash"], "Est."),
+        ("Series E close", summary["financing_close_date"].to_pydatetime(), "Est."),
+        ("Net primary proceeds", summary["net_primary_proceeds"], "Derived"),
+        ("Cash falls below minimum without Series E", summary["funding_need_date"].to_pydatetime(), "Derived"),
+        ("IPO target", summary["ipo_target_date"].to_pydatetime(), "Est."),
+        ("Cash at IPO in base case", summary["cash_at_ipo"], "Derived"),
+        ("Cash at IPO in downside case", summary["downside_cash_at_ipo"], "Derived"),
+        ("Next equity need", summary["next_equity_need"], "Derived"),
+    ]
+    _write_table(
+        ws,
+        summary_start,
+        ["Cash summary", "Value", "Evidence"],
+        summary_rows,
+    )
+    for row in range(summary_start + 1, summary_start + 1 + len(summary_rows)):
+        ws.cell(row, 2).fill = ESTIMATE_FILL
+    ws.cell(summary_start + 1, 2).number_format = "$#,##0"
+    ws.cell(summary_start + 2, 2).number_format = "$#,##0"
+    ws.cell(summary_start + 3, 2).number_format = "mmm-yy"
+    ws.cell(summary_start + 4, 2).number_format = "$#,##0"
+    ws.cell(summary_start + 5, 2).number_format = "mmm-yy"
+    ws.cell(summary_start + 6, 2).number_format = "mmm-yy"
+    ws.cell(summary_start + 7, 2).number_format = "$#,##0"
+    ws.cell(summary_start + 8, 2).number_format = "$#,##0"
+
+    table_start = summary_start + len(summary_rows) + 3
+    columns = [
+        ("Month", None),
+        ("Beginning cash", "$#,##0"),
+        ("Revenue", "$#,##0"),
+        ("Gross profit", "$#,##0"),
+        ("Operating expenses", "$#,##0"),
+        ("Adjusted operating income", "$#,##0;[Red]($#,##0)"),
+        ("Stock compensation", "$#,##0"),
+        ("Capital expenditures", "$#,##0"),
+        ("Working capital change", "$#,##0"),
+        ("Free cash flow", "$#,##0;[Red]($#,##0)"),
+        ("Series E primary", "$#,##0"),
+        ("Financing fees", "$#,##0"),
+        ("Ending cash", "$#,##0"),
+        ("Ending cash without Series E", "$#,##0;[Red]($#,##0)"),
+        ("Downside ending cash", "$#,##0;[Red]($#,##0)"),
+        ("Minimum cash", "$#,##0"),
+        ("Milestone", None),
+    ]
+    rows = []
+    for date, row in model.monthly_cash_flow.iterrows():
+        rows.append(
+            (
+                date.to_pydatetime(),
+                row["beginning_cash"],
+                row["revenue"],
+                row["gross_profit"],
+                row["operating_expenses"],
+                row["adjusted_operating_income"],
+                row["stock_compensation"],
+                row["capital_expenditures"],
+                row["working_capital_change"],
+                row["free_cash_flow"],
+                row["primary_financing"],
+                row["financing_fees"],
+                row["ending_cash"],
+                row["ending_cash_without_series_e"],
+                row["ending_cash_downside"],
+                row["minimum_cash"],
+                row["milestone"],
+            )
+        )
+    _write_table(
+        ws,
+        table_start,
+        [column[0] for column in columns],
+        rows,
+    )
+    for row_offset in range(1, len(rows) + 1):
+        excel_row = table_start + row_offset
+        ws.cell(excel_row, 1).number_format = "mmm-yy"
+        for column_index, (_, number_format) in enumerate(columns[1:], 2):
+            if number_format:
+                ws.cell(excel_row, column_index).number_format = number_format
+            ws.cell(excel_row, column_index).fill = ESTIMATE_FILL
+
+    chart = LineChart()
+    chart.title = "Monthly ending cash"
+    chart.y_axis.title = "$M"
+    chart.height = 9
+    chart.width = 18
+    chart.legend.position = "b"
+    chart.x_axis.tickLblSkip = 6
+    chart.x_axis.number_format = "mmm-yy"
+    chart.x_axis.tickLblPos = "low"
+    data = Reference(
+        ws,
+        min_col=13,
+        max_col=16,
+        min_row=table_start,
+        max_row=table_start + len(rows),
+    )
+    categories = Reference(
+        ws,
+        min_col=1,
+        min_row=table_start + 1,
+        max_row=table_start + len(rows),
+    )
+    chart.add_data(data, titles_from_data=True)
+    chart.set_categories(categories)
+    for series, color in zip(
+        chart.series,
+        ("orange", "gray_500", "coral", "orange_dark"),
+        strict=True,
+    ):
+        series.graphicalProperties.line.solidFill = COLORS[color]
+        series.graphicalProperties.line.width = 22000
+    ws.add_chart(chart, "J4")
+    _set_widths(
+        ws,
+        {
+            1: 14,
+            2: 18,
+            3: 14,
+            4: 16,
+            5: 20,
+            6: 24,
+            7: 20,
+            8: 22,
+            9: 22,
+            10: 18,
+            11: 18,
+            12: 16,
+            13: 18,
+            14: 30,
+            15: 22,
+            16: 18,
+            17: 34,
+        },
+    )
+    return {
+        **lookup,
+        "cash.beginning_cash": f"{_quote_sheet(ws.title)}!$B${summary_start + 1}",
+        "cash.minimum_cash": f"{_quote_sheet(ws.title)}!$B${summary_start + 2}",
+        "cash.financing_close_date": f"{_quote_sheet(ws.title)}!$B${summary_start + 3}",
+        "cash.net_primary_proceeds": f"{_quote_sheet(ws.title)}!$B${summary_start + 4}",
+        "cash.funding_need_date": f"{_quote_sheet(ws.title)}!$B${summary_start + 5}",
+        "cash.ipo_target_date": f"{_quote_sheet(ws.title)}!$B${summary_start + 6}",
+        "cash.cash_at_ipo": f"{_quote_sheet(ws.title)}!$B${summary_start + 7}",
+        "cash.downside_cash_at_ipo": f"{_quote_sheet(ws.title)}!$B${summary_start + 8}",
+        "cash.next_equity_need": f"{_quote_sheet(ws.title)}!$B${summary_start + 9}",
+    }
+
+
+def _balance_sheet(
+    ws: Any,
+    model: ModelBundle,
+) -> dict[str, str]:
+    _prepare_sheet(ws, "A5")
+    start = _sheet_title(
+        ws,
+        "Balance Sheet",
+        "Simplified balance sheet in $M. Cash links to the cash-flow statement.",
+    )
+    years = list(model.balance_sheet.index)
+    metrics = [
+        ("Cash", "cash"),
+        ("Accounts receivable", "accounts_receivable"),
+        ("Other current assets", "other_current_assets"),
+        ("Property and equipment", "property_and_equipment"),
+        ("Other assets", "other_assets"),
+        ("Total assets", "total_assets"),
+        ("Accounts payable", "accounts_payable"),
+        ("Accrued expenses", "accrued_expenses"),
+        ("Deferred revenue", "deferred_revenue"),
+        ("Other liabilities", "other_liabilities"),
+        ("Debt", "total_debt"),
+        ("Total liabilities", "total_liabilities"),
+        ("Total equity", "total_equity"),
+        ("Liabilities and equity", "liabilities_and_equity"),
+        ("Balance check", "balance_check"),
+    ]
+    rows = [
+        (label, *model.balance_sheet[column].tolist())
+        for label, column in metrics
+    ]
+    _write_table(ws, start, ["Balance sheet", *years], rows)
+    lookup: dict[str, str] = {}
+    row_by_metric = {
+        column: start + row_offset
+        for row_offset, (_, column) in enumerate(metrics, 1)
+    }
+    total_rows = {"total_assets", "total_liabilities", "total_equity", "liabilities_and_equity", "balance_check"}
+    for row_offset, (_, column) in enumerate(metrics, 1):
+        for year_offset, year in enumerate(years, 2):
+            cell = ws.cell(start + row_offset, year_offset)
+            column_letter = get_column_letter(year_offset)
+            if column == "cash":
+                cash_flow_column = get_column_letter(year_offset)
+                cell.value = f"='Cash Flow'!{cash_flow_column}16"
+            elif column == "total_assets":
+                asset_rows = [
+                    row_by_metric["cash"],
+                    row_by_metric["accounts_receivable"],
+                    row_by_metric["other_current_assets"],
+                    row_by_metric["property_and_equipment"],
+                    row_by_metric["other_assets"],
+                ]
+                cell.value = "=" + "+".join(
+                    f"{column_letter}{row}" for row in asset_rows
+                )
+            elif column == "total_liabilities":
+                liability_rows = [
+                    row_by_metric["accounts_payable"],
+                    row_by_metric["accrued_expenses"],
+                    row_by_metric["deferred_revenue"],
+                    row_by_metric["other_liabilities"],
+                    row_by_metric["total_debt"],
+                ]
+                cell.value = "=" + "+".join(
+                    f"{column_letter}{row}" for row in liability_rows
+                )
+            elif column == "total_equity":
+                cell.value = (
+                    f"={column_letter}{row_by_metric['total_assets']}"
+                    f"-{column_letter}{row_by_metric['total_liabilities']}"
+                )
+            elif column == "liabilities_and_equity":
+                cell.value = (
+                    f"={column_letter}{row_by_metric['total_liabilities']}"
+                    f"+{column_letter}{row_by_metric['total_equity']}"
+                )
+            elif column == "balance_check":
+                cell.value = (
+                    f"={column_letter}{row_by_metric['total_assets']}"
+                    f"-{column_letter}{row_by_metric['liabilities_and_equity']}"
+                )
+            cell.number_format = "$#,##0;[Red]($#,##0)"
+            cell.fill = ESTIMATE_FILL
+            lookup[f"balance_sheet.{column}.{year}"] = (
+                f"{_quote_sheet(ws.title)}!${get_column_letter(year_offset)}${start + row_offset}"
+            )
+        if column in total_rows:
+            for column_index in range(1, len(years) + 2):
+                ws.cell(start + row_offset, column_index).font = Font(
+                    name="Arial",
+                    size=9,
+                    bold=True,
+                    color=COLORS["ink"],
+                )
+    _set_widths(ws, {1: 32, **{column: 14 for column in range(2, 9)}})
+    return lookup
+
+
+def _visuals_sheet(ws: Any, model: ModelBundle) -> None:
+    _prepare_sheet(ws)
+    _sheet_title(
+        ws,
+        "Visuals",
+        "Charts use the same data as the P&L, cash flow, balance sheet, and operating schedules.",
+    )
+    chart_paths = render_workbook_charts(model, OUTPUT_DIR / ".charts")
+    revenue_image = XLImage(chart_paths["revenue"])
+    revenue_image.width = 675
+    revenue_image.height = 340
+    ws.add_image(revenue_image, "A4")
+    use_image = XLImage(chart_paths["use_of_proceeds"])
+    use_image.width = 675
+    use_image.height = 285
+    ws.add_image(use_image, "J4")
+    cash_image = XLImage(chart_paths["cash"])
+    cash_image.width = 1360
+    cash_image.height = 480
+    ws.add_image(cash_image, "A23")
+
+    revenue_start = 42
+    years = list(range(2026, 2032))
+    revenue_rows = [
+        (
+            f"{year}E",
+            model.financials.loc[year, "revenue_individual"],
+            model.financials.loc[year, "revenue_enterprise"],
+            model.financials.loc[year, "revenue_usage_and_deploy"],
+        )
+        for year in years
+    ]
+    _write_table(
+        ws,
+        revenue_start,
+        ["Year", "Individual", "Enterprise", "Agent use and hosting"],
+        revenue_rows,
+    )
+    use_start = 42
+    use_columns = ["Use", *model.use_of_proceeds["category"].tolist()]
+    use_values = ["Primary", *model.use_of_proceeds["amount"].tolist()]
+    for column, value in enumerate(use_columns, 10):
+        ws.cell(use_start, column, value)
+    for column, value in enumerate(use_values, 10):
+        ws.cell(use_start + 1, column, value)
+    cash_start = revenue_start + len(revenue_rows) + 4
+    cash_rows = []
+    for date, row in model.monthly_cash_flow.loc[
+        : model.cash_summary["ipo_target_date"]
+    ].iterrows():
+        no_financing = (
+            row["ending_cash_without_series_e"]
+            if date <= model.cash_summary["funding_need_date"]
+            else None
+        )
+        cash_rows.append(
+            (
+                date.strftime("%b-%y"),
+                row["ending_cash"],
+                row["ending_cash_downside"],
+                no_financing,
+                row["minimum_cash"],
+            )
+        )
+    _write_table(
+        ws,
+        cash_start,
+        [
+            "Month",
+            "Base with Series E",
+            "Downside with Series E",
+            "No Series E",
+            "Minimum cash",
+        ],
+        cash_rows,
+    )
+    for row in range(cash_start + 1, cash_start + 1 + len(cash_rows)):
+        for column in range(2, 17):
+            ws.cell(row, column).number_format = "$#,##0"
+    _set_widths(ws, {column: 18 for column in range(1, 17)})
+
+
 def _scenarios_sheet(
     ws: Any,
     model: ModelBundle,
@@ -682,7 +1110,7 @@ def _scenarios_sheet(
     start = _sheet_title(
         ws,
         "Scenarios",
-        "Base, downside, and upside operating outcomes for 2026–2031.",
+        "Base, downside, and upside operating outcomes from 2026 to 2031.",
     )
     years = list(model.scenarios["base"].index)
     rows: list[tuple[Any, ...]] = []
@@ -742,6 +1170,13 @@ def _scenarios_sheet(
         max_row=start,
     )
     chart.set_categories(categories)
+    for series, color in zip(
+        chart.series,
+        ("orange_dark", "orange", "coral"),
+        strict=True,
+    ):
+        series.graphicalProperties.line.solidFill = COLORS[color]
+        series.graphicalProperties.line.width = 22000
     ws.add_chart(chart, f"A{start + 16}")
     _set_widths(ws, {1: 16, 2: 32, **{column: 14 for column in range(3, 9)}})
     return lookup
@@ -805,7 +1240,7 @@ def _valuation_sheet(
     start = _sheet_title(
         ws,
         "Valuation",
-        "Illustrative forward-revenue framework; not a fairness opinion or investment recommendation.",
+        "Illustrative forward-revenue framework. This is not a fairness opinion or investment recommendation.",
     )
     transaction = model.transaction
     ntm_year = model.assumptions["valuation"]["ntm_revenue_year"]
@@ -923,8 +1358,8 @@ def _metric_reconciliation_rows(
         (4, "Countries reached", "190+", company_estimates["countries_reached"], "#", "estimate", "MODEL-ESTIMATES", "company_estimates.countries_reached"),
         (5, "Registered users", "50M+", financials.loc[2026, "registered_users_m"], "M", "public", "RPL-D-2026", "kpi.registered_users_m.2026"),
         (6, "Specialized tools", "6+", problem["specialized_tools"], "#", "estimate", "MODEL-ESTIMATES", "problem_benchmarks.specialized_tools"),
-        (6, "Cross-functional handoffs", "7–12", problem["handoffs_high"], "#", "estimate", "MODEL-ESTIMATES", "problem_benchmarks.handoffs_high"),
-        (6, "Idea-to-production cycle", "4–12 wks", problem["cycle_weeks_high"], "weeks", "estimate", "MODEL-ESTIMATES", "problem_benchmarks.cycle_weeks_high"),
+        (6, "Cross-functional handoffs", "7 to 12", problem["handoffs_high"], "#", "estimate", "MODEL-ESTIMATES", "problem_benchmarks.handoffs_high"),
+        (6, "Idea-to-production cycle", "4 to 12 wks", problem["cycle_weeks_high"], "weeks", "estimate", "MODEL-ESTIMATES", "problem_benchmarks.cycle_weeks_high"),
         (6, "Agent test cost", "<$1", problem["agent_test_cost_usd"], "$", "estimate", "MODEL-ESTIMATES", "problem_benchmarks.agent_test_cost_usd"),
         (8, "Agent 4 speed improvement", "10x", public_anchors["agent_4_speed_multiple"], "x", "public", "RPL-AGENT4-2026", "public_anchors.agent_4_speed_multiple"),
         (9, "UKG feedback-capacity gain", "400%", public_anchors["ukg_feedback_capacity_multiple"], "x", "public", "RPL-CUST-UKG", "public_anchors.ukg_feedback_capacity_multiple"),
@@ -933,7 +1368,7 @@ def _metric_reconciliation_rows(
         (11, "2031 revenue / TAM", "2.1%", financials.loc[2031, "revenue"] / model.market["tam"].sum(), "%", "derived", "MODEL-ESTIMATES", None),
         (13, "2026 revenue", "$650M", financials.loc[2026, "revenue"], "$M", "estimate", "MODEL-ESTIMATES", "financial.revenue.2026"),
         (13, "2026 exit ARR", "$1.0B", financials.loc[2026, "exit_arr"], "$M", "management_target", "RPL-D-2026", "kpi.exit_arr.2026"),
-        (13, "2024–2028 revenue scale", "73x", revenue_scale, "x", "derived", "MODEL-ESTIMATES", None),
+        (13, "2024 to 2028 revenue growth", "73x", revenue_scale, "x", "derived", "MODEL-ESTIMATES", None),
         (13, "2028 registered users", "100M", financials.loc[2028, "registered_users_m"], "M", "estimate", "MODEL-ESTIMATES", "kpis.registered_users_m[5]"),
         (13, "2028 exit ARR", "$2.35B", financials.loc[2028, "exit_arr"], "$M", "estimate", "MODEL-ESTIMATES", "kpis.exit_arr[5]"),
         (14, "Recurring share", "70%", revenue_quality["recurring_share_2026"], "%", "estimate", "MODEL-ESTIMATES", "revenue_quality.recurring_share_2026"),
@@ -956,17 +1391,40 @@ def _metric_reconciliation_rows(
         (20, "Median sales cycle", "78d", pipeline["median_sales_cycle_days"], "days", "estimate", "MODEL-ESTIMATES", "pipeline.median_sales_cycle_days"),
         (20, "Quota attainment", "64%", pipeline["quota_attainment"], "%", "estimate", "MODEL-ESTIMATES", "pipeline.quota_attainment"),
         (23, "2026 revenue", "$650M", financials.loc[2026, "revenue"], "$M", "estimate", "MODEL-ESTIMATES", "financial.revenue.2026"),
+        (23, "2028 adjusted operating income", "$293M", financials.loc[2028, "adjusted_operating_income"], "$M", "estimate", "MODEL-ESTIMATES", "financial.adjusted_operating_income.2028"),
+        (23, "2028 free cash flow", "$278M", financials.loc[2028, "free_cash_flow"], "$M", "estimate", "MODEL-ESTIMATES", "cash_flow.free_cash_flow.2028"),
+        (23, "2031 adjusted operating margin", "31%", financials.loc[2031, "adjusted_operating_margin"], "%", "estimate", "MODEL-ESTIMATES", "financial.adjusted_operating_margin.2031"),
         (24, "2031 revenue", "$5.25B", financials.loc[2031, "revenue"], "$M", "estimate", "MODEL-ESTIMATES", "financial.revenue.2031"),
-        (24, "2026–2031 revenue CAGR", "52%", revenue_cagr, "%", "derived", "MODEL-ESTIMATES", None),
+        (24, "2026 to 2031 revenue CAGR", "52%", revenue_cagr, "%", "derived", "MODEL-ESTIMATES", None),
         (24, "2031 gross margin", "76%", financials.loc[2031, "gross_margin"], "%", "estimate", "MODEL-ESTIMATES", "financial.gross_margin.2031"),
         (24, "2031 international mix", "52%", financials.loc[2031, "international_revenue_share"], "%", "estimate", "MODEL-ESTIMATES", "kpis.international_revenue_share[8]"),
         (24, "2031 enterprise + runtime mix", "77%", enterprise_runtime_mix, "%", "derived", "MODEL-ESTIMATES", None),
-        (25, "2028 free cash flow", "$278M", financials.loc[2028, "free_cash_flow"], "$M", "estimate", "MODEL-ESTIMATES", "financial.free_cash_flow.2028"),
+        (25, "2028 free cash flow", "$278M", financials.loc[2028, "free_cash_flow"], "$M", "estimate", "MODEL-ESTIMATES", "cash_flow.free_cash_flow.2028"),
         (26, "Primary allocation", "$800M", transaction["primary"], "$M", "estimate", "MODEL-ESTIMATES", "transaction.primary"),
-        (27, "2028 registered users", "100M", financials.loc[2028, "registered_users_m"], "M", "estimate", "MODEL-ESTIMATES", "kpis.registered_users_m[5]"),
-        (27, "2030 free cash flow margin", "27%", financials.loc[2030, "free_cash_flow_margin"], "%", "estimate", "MODEL-ESTIMATES", "financial.free_cash_flow_margin.2030"),
+        (27, "Cash at September 2026", "$274M", model.cash_summary["beginning_cash"], "$M", "estimate", "MODEL-ESTIMATES", "cash.beginning_cash"),
+        (27, "Minimum operating cash", "$250M", model.cash_summary["minimum_cash"], "$M", "estimate", "MODEL-ESTIMATES", "cash.minimum_cash"),
+        (27, "Cash falls below minimum without Series E", "Nov-26", model.cash_summary["funding_need_date"].to_pydatetime(), "date", "derived", "MODEL-ESTIMATES", "cash.funding_need_date"),
+        (27, "Net primary proceeds", "$770M", model.cash_summary["net_primary_proceeds"], "$M", "derived", "MODEL-ESTIMATES", "cash.net_primary_proceeds"),
+        (27, "Further equity before IPO", "None", model.cash_summary["next_equity_need"], "text", "derived", "MODEL-ESTIMATES", "cash.next_equity_need"),
+        (27, "IPO target", "H2 2030", model.cash_summary["ipo_target_date"].to_pydatetime(), "date", "estimate", "MODEL-ESTIMATES", "cash.ipo_target_date"),
+        (27, "Downside cash at IPO", "$902M", model.cash_summary["downside_cash_at_ipo"], "$M", "derived", "MODEL-ESTIMATES", "cash.downside_cash_at_ipo"),
         (30, "2031 revenue", "$5.25B", financials.loc[2031, "revenue"], "$M", "estimate", "MODEL-ESTIMATES", "financial.revenue.2031"),
     ]
+    for _, use in model.use_of_proceeds.iterrows():
+        key = str(use["category"]).lower().replace(" ", "_")
+        metrics.append(
+            (
+                26,
+                use["category"],
+                f"${use['amount']:,.0f}M",
+                use["amount"],
+                "$M",
+                "estimate",
+                "MODEL-ESTIMATES",
+                f"use.{key}",
+            )
+        )
+    metrics.sort(key=lambda item: (item[0], item[1]))
     rows = []
     for slide, metric, display, value, units, evidence, source_ids, key in metrics:
         reference = lookup.get(key, "") if key else ""
@@ -1080,6 +1538,39 @@ def _qa_sheet(
             0,
             "PASS" if model.financials.loc[2028, "free_cash_flow"] > 0 else "FAIL",
         ),
+        (
+            "Series E primary included once",
+            model.monthly_cash_flow["primary_financing"].sum(),
+            model.transaction["primary"],
+            "PASS"
+            if model.monthly_cash_flow["primary_financing"].sum()
+            == model.transaction["primary"]
+            else "FAIL",
+        ),
+        (
+            "No-financing cash falls below minimum",
+            model.cash_summary["funding_need_date"].to_pydatetime(),
+            model.cash_summary["financing_close_date"].to_pydatetime(),
+            "PASS" if model.cash_summary["funding_need_date"] is not None else "FAIL",
+        ),
+        (
+            "Base cash remains above minimum",
+            model.cash_summary["minimum_base_cash"],
+            model.cash_summary["minimum_cash"],
+            "PASS"
+            if model.cash_summary["minimum_base_cash"]
+            >= model.cash_summary["minimum_cash"]
+            else "FAIL",
+        ),
+        (
+            "Downside cash remains above minimum",
+            model.cash_summary["minimum_downside_cash"],
+            model.cash_summary["minimum_cash"],
+            "PASS"
+            if model.cash_summary["minimum_downside_cash"]
+            >= model.cash_summary["minimum_cash"]
+            else "FAIL",
+        ),
     ]
     _write_table(
         ws,
@@ -1115,17 +1606,20 @@ def build_workbook(
     workbook.calculation.calcMode = "auto"
 
     lookup: dict[str, str] = {}
+    lookup.update(_assumptions_sheet(workbook["Assumptions"], model))
+    _visuals_sheet(workbook["Visuals"], model)
+    lookup.update(_p_and_l_sheet(workbook["P&L"], model))
+    lookup.update(_cash_flow_sheet(workbook["Cash Flow"], model))
+    lookup.update(_balance_sheet(workbook["Balance Sheet"], model))
     lookup.update(_read_me_sheet(workbook["Read Me"], model))
     _source_register_sheet(workbook["Source Register"], sources)
     _public_facts_sheet(workbook["Public Facts"], sources)
-    lookup.update(_assumptions_sheet(workbook["Assumptions"], model))
     lookup.update(_historical_kpis_sheet(workbook["Historical KPIs"], model))
     lookup.update(_revenue_build_sheet(workbook["Revenue Build"], model))
     _cohorts_sheet(workbook["Cohorts & Retention"], model)
     lookup.update(_unit_economics_sheet(workbook["Unit Economics"], model))
     lookup.update(_pipeline_sheet(workbook["GTM & Pipeline"], model))
     lookup.update(_market_sheet(workbook["Market Model"], model))
-    lookup.update(_p_and_l_sheet(workbook["P&L and Cash Flow"], model))
     lookup.update(_scenarios_sheet(workbook["Scenarios"], model))
     lookup.update(_use_of_proceeds_sheet(workbook["Use of Proceeds"], model))
     lookup.update(_valuation_sheet(workbook["Valuation"], model))

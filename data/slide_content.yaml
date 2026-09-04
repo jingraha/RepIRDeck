@@ -1,98 +1,98 @@
 meta:
   confidentiality: "Confidential | Illustrative analyst estimates based on public information"
-  estimate_note: "Est. = analyst estimate; MT = management target; Derived = calculated from cited public information."
+  estimate_note: "Est. = analyst estimate. MT = management target. Derived = calculated from cited public information."
 
 slides:
   1:
-    title: "Build the software the world is waiting for"
-    subtitle: "Series E financing | September 2026"
+    title: "Replit Series E"
+    subtitle: "Build and run software from one prompt | September 2026"
   2:
-    title: "$1B to compound the category leader"
-    subtitle: "Primary growth capital plus targeted stakeholder liquidity"
+    title: "$1B funds the next stage of growth"
+    subtitle: "$800M funds the company. $200M provides employee and early-investor liquidity."
   3:
-    title: "Replit is becoming the creation layer for software"
-    subtitle: "Five reinforcing advantages support durable category leadership"
+    title: "Five reasons to invest now"
+    subtitle: "Distribution, product depth, enterprise demand, unit economics, and market size"
   4:
-    title: "Mass distribution is converting into an enterprise platform"
-    subtitle: "Consumer-scale reach with expanding monetization and governance"
+    title: "50M users create a direct path into enterprise accounts"
+    subtitle: "Public scale metrics and modeled financial estimates"
   5:
-    title: "Software creation expands from millions of developers to billions of people"
-    subtitle: "Replit translates intent into deployed software"
+    title: "Replit expands software creation beyond professional developers"
+    subtitle: "Students, founders, employees, and enterprises can build working software"
   6:
-    title: "Software demand is unlimited; expert capacity is not"
-    subtitle: "The traditional stack fragments creation across scarce skills and disconnected tools"
+    title: "Software demand grows faster than engineering capacity"
+    subtitle: "The current workflow requires many tools, teams, and handoffs"
   7:
-    title: "One agentic cloud replaces the fragmented software lifecycle"
-    subtitle: "From idea to production in a single collaborative environment"
+    title: "Replit puts the full software workflow in one product"
+    subtitle: "Users can plan, build, test, secure, deploy, and manage an app"
   8:
-    title: "Agent 4 turns human intent into parallel, production-ready work"
-    subtitle: "A multi-agent workflow keeps users in the creative loop"
+    title: "Agent 4 plans, builds, tests, and deploys in parallel"
+    subtitle: "The user sets the goal and reviews the result"
   9:
-    title: "Customers trade weeks of coordination for hours of creation"
-    subtitle: "Faster feedback compounds into better products and lower opportunity cost"
+    title: "Customers build working software in days instead of weeks"
+    subtitle: "Faster prototypes reduce delay before an engineering team starts"
   10:
-    title: "Five structural shifts make this market inevitable now"
-    subtitle: "Capability, cost, labor, distribution, and governance have crossed adoption thresholds"
+    title: "The market is ready now"
+    subtitle: "Models work better, cost less, and meet more enterprise requirements"
   11:
-    title: "Replit addresses a $250B creation and runtime opportunity"
-    subtitle: "A bottom-up market model spans creators, teams, enterprises, and deployed workloads"
+    title: "A $250B market supports several revenue streams"
+    subtitle: "The estimate covers individual users, business users, development teams, and running apps"
   12:
-    title: "Replit is the only broad platform spanning intent, code, cloud, and governance"
-    subtitle: "Point tools optimize one step; Replit owns the complete build-to-run loop"
+    title: "Replit covers more of the workflow than point tools"
+    subtitle: "The product connects app creation, code control, cloud runtime, collaboration, and governance"
   13:
-    title: "Revenue is scaling faster than the installed base"
-    subtitle: "Agent adoption and enterprise expansion create multiple monetization vectors"
+    title: "Revenue grows across three distinct sources"
+    subtitle: "Stacked bars show individual, enterprise, and agent usage revenue"
   14:
-    title: "A diversified, low-concentration model is shifting toward enterprise commitments"
-    subtitle: "Recurring subscriptions anchor revenue while usage captures customer value"
+    title: "Subscriptions provide a base. Usage adds growth."
+    subtitle: "The model has low estimated customer concentration and broad geographic reach"
   15:
-    title: "Cohorts expand as teams move from prototypes to production"
-    subtitle: "Estimated retention reflects growing workload depth and organizational adoption"
+    title: "Enterprise accounts expand after the first deployment"
+    subtitle: "The cohort model tracks retained and expanded annual recurring revenue"
   16:
-    title: "Enterprise proof is moving from experimentation to operating leverage"
-    subtitle: "Named customers demonstrate speed, collaboration, and measurable feedback gains"
+    title: "UKG reports 4x more customer feedback before engineering starts"
+    subtitle: "UKG is an HR and workforce software company with more than 16,000 employees"
   17:
-    title: "Free creation acquires users; subscriptions, agents, and runtime monetize success"
-    subtitle: "A land-expand-deploy model aligns price with delivered value"
+    title: "Replit charges for access, agent work, and running apps"
+    subtitle: "Free use brings in customers. Paid use grows with team size and workload."
   18:
-    title: "Scale and model efficiency unlock software-like economics"
-    subtitle: "Compute cost declines while higher-value enterprise mix improves contribution"
+    title: "Lower model cost lifts gross margin"
+    subtitle: "Enterprise contracts and lower compute cost improve contribution margin"
   19:
-    title: "Product-led distribution creates an efficient path into the enterprise"
-    subtitle: "Individual builders seed teams, workloads, and centrally governed deployments"
+    title: "Individual users open the door to enterprise sales"
+    subtitle: "The sales team converts active users, teams, and deployed apps"
   20:
-    title: "Pipeline depth supports the next phase of predictable growth"
-    subtitle: "Coverage is strong; execution focus shifts to conversion and rep productivity"
+    title: "$880M of pipeline supports the 2027 plan"
+    subtitle: "The main work is conversion, security review, and sales-rep productivity"
   21:
-    title: "Competition validates the category—but remains structurally fragmented"
-    subtitle: "Replit differentiates through breadth, cloud runtime, collaboration, and distribution"
+    title: "Strong competitors prove the market. No product matches Replit's full scope."
+    subtitle: "Replit serves more users and covers more of the app workflow"
   22:
-    title: "Every successful build strengthens the next one"
-    subtitle: "Distribution, workflow data, runtime, ecosystem, and governance form a compounding moat"
+    title: "Usage data, runtime, and controls make Replit harder to replace"
+    subtitle: "Each deployed app adds product data, revenue, and customer dependence"
   23:
-    title: "The model is crossing from hypergrowth investment to operating leverage"
-    subtitle: "Gross-margin expansion increasingly funds product and go-to-market scale"
+    title: "The P&L reaches operating profit in 2028"
+    subtitle: "Revenue growth and gross-margin gains fund continued investment"
   24:
-    title: "The base case reaches $5.3B revenue with durable growth"
-    subtitle: "Enterprise and workload monetization become the majority of the business"
+    title: "Enterprise and runtime drive the 2026 to 2031 plan"
+    subtitle: "Stacked bars show individual, enterprise, and agent usage revenue"
   25:
-    title: "Gross-margin expansion brings free-cash-flow breakeven within reach"
-    subtitle: "Efficiency and mix offset continued investment in product and distribution"
+    title: "Free cash flow turns positive in 2028"
+    subtitle: "Higher gross margin pays for product, sales, and international growth"
   26:
-    title: "$800M of primary capital funds four measurable growth engines"
-    subtitle: "$200M of secondary liquidity is separate from company proceeds"
+    title: "$800M funds six programs with clear milestones"
+    subtitle: "The $200M secondary purchase does not add cash to the company"
   27:
-    title: "This round finances the milestones required for public-market readiness"
-    subtitle: "Scale, retention, margins, governance, and international depth advance together"
+    title: "The Series E removes the cash constraint before the IPO"
+    subtitle: "The monthly model shows the funding date, cash floor, and target IPO window"
   28:
-    title: "Founder-led vision with an institutional mandate"
-    subtitle: "The next phase pairs product velocity with scaled operating discipline"
+    title: "Founder-led product vision needs stronger operating systems"
+    subtitle: "The next stage adds financial, enterprise, international, and board depth"
   29:
-    title: "The largest risks are visible, measurable, and actively mitigated"
-    subtitle: "The plan preserves strategic flexibility while building durable control points"
+    title: "The main risks have owners and controls"
+    subtitle: "The company tracks model cost, competition, security, sales conversion, and international delivery"
   30:
-    title: "Replit can become the default way the world creates software"
-    subtitle: "A $1B Series E accelerates the path from category leadership to enduring platform"
+    title: "Replit can become the standard way to build software"
+    subtitle: "The Series E funds product, growth, talent, international expansion, and a clear path to IPO"
 
 source_map:
   1: [RPL-BRAND, MODEL-ESTIMATES]

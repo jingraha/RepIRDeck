@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 from collections.abc import Sequence
 from typing import Any
 
@@ -235,6 +236,39 @@ def add_tag(
     return width
 
 
+def add_chart_legend(
+    slide: Any,
+    items: Sequence[tuple[str, str]],
+    x: float,
+    y: float,
+    *,
+    item_width: float = 1.65,
+    text_color: str = "gray_700",
+) -> None:
+    for index, (label, color) in enumerate(items):
+        item_x = x + index * item_width
+        add_rect(
+            slide,
+            item_x,
+            y + 0.04,
+            0.18,
+            0.08,
+            fill=color,
+            radius=True,
+        )
+        add_text(
+            slide,
+            label,
+            item_x + 0.25,
+            y,
+            item_width - 0.28,
+            0.20,
+            font_size=7,
+            color=text_color,
+            bold=True,
+        )
+
+
 def add_metric_card(
     slide: Any,
     x: float,
@@ -430,8 +464,15 @@ def add_native_line_chart(
     show_end_labels: bool = True,
     gridlines: int = 4,
     dark: bool = False,
+    x_label_every: int = 1,
+    show_markers: bool = True,
 ) -> None:
-    all_values = [float(value) for item in series for value in item["values"]]
+    all_values = [
+        float(value)
+        for item in series
+        for value in item["values"]
+        if value is not None and not math.isnan(float(value))
+    ]
     y_min = min_value if min_value is not None else min(all_values)
     y_max = max_value if max_value is not None else max(all_values)
     if y_max == y_min:
@@ -476,7 +517,9 @@ def add_native_line_chart(
             plot_left + index * plot_width / (len(labels) - 1)
             for index in range(len(labels))
         ]
-    for x_pos, label in zip(x_positions, labels, strict=True):
+    for index, (x_pos, label) in enumerate(zip(x_positions, labels, strict=True)):
+        if index % x_label_every != 0 and index != len(labels) - 1:
+            continue
         add_text(
             slide,
             label,
@@ -491,14 +534,24 @@ def add_native_line_chart(
 
     legend_x = plot_left
     for item in series:
-        values = [float(value) for value in item["values"]]
+        values = [
+            None
+            if value is None or math.isnan(float(value))
+            else float(value)
+            for value in item["values"]
+        ]
         color = item.get("color", "orange")
-        points = []
+        points: list[tuple[float, float] | None] = []
         for x_pos, value in zip(x_positions, values, strict=True):
+            if value is None:
+                points.append(None)
+                continue
             ratio = (value - y_min) / (y_max - y_min)
             y_pos = plot_top + plot_height - ratio * plot_height
             points.append((x_pos, y_pos))
         for point_index in range(len(points) - 1):
+            if points[point_index] is None or points[point_index + 1] is None:
+                continue
             add_line(
                 slide,
                 points[point_index][0],
@@ -507,22 +560,33 @@ def add_native_line_chart(
                 points[point_index + 1][1],
                 color=color,
                 width=item.get("width", 2.3),
+                dash=item.get("dash", False),
             )
-        for x_pos, y_pos in points:
-            add_circle(
-                slide,
-                x_pos - 0.055,
-                y_pos - 0.055,
-                0.11,
-                fill=color,
-                line="white" if not dark else "ink",
-            )
+        if show_markers:
+            for point in points:
+                if point is None:
+                    continue
+                x_pos, y_pos = point
+                add_circle(
+                    slide,
+                    x_pos - 0.055,
+                    y_pos - 0.055,
+                    0.11,
+                    fill=color,
+                    line="white" if not dark else "ink",
+                )
         if show_end_labels:
+            valid_points = [
+                (point, value)
+                for point, value in zip(points, values, strict=True)
+                if point is not None and value is not None
+            ]
+            end_point, end_value = valid_points[-1]
             add_text(
                 slide,
-                item.get("end_label", y_format.format(values[-1])),
-                points[-1][0] - 0.45,
-                points[-1][1] - 0.36,
+                item.get("end_label", y_format.format(end_value)),
+                end_point[0] - 0.45,
+                end_point[1] - 0.36,
                 0.9,
                 0.22,
                 font_size=7.5,
