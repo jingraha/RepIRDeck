@@ -1,0 +1,391 @@
+sources:
+  - id: RPL-D-2026
+    publisher: Replit
+    title: "The Future is Actually Very Human"
+    url: "https://replit.com/blog/replit-raises-400-million-dollars"
+    publication_date: "2026-03-11"
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "$400M financing at a $9B valuation"
+      - "More than 50M users"
+      - "Users from 85% of the Fortune 500"
+      - "Management target of $1B run-rate revenue by year-end 2026"
+      - "Global expansion focus across Europe, Asia, and the Middle East"
+      - "Agent 4 is described as 10x faster than Agent 3"
+  - id: RPL-C-2025
+    publisher: Replit
+    title: "Replit Raises $250M in Series C Funding"
+    url: "https://replit.com/news/funding-announcement-series-c"
+    publication_date: "2025-09-10"
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "$250M Series C financing at a $3B valuation"
+  - id: RPL-AGENT4-2026
+    publisher: Replit
+    title: "Introducing Replit Agent 4: Built for Creativity"
+    url: "https://replit.com/blog/introducing-agent-4-built-for-creativity"
+    publication_date: "2026-03-11"
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "Agent 4 is described as 10x faster than Agent 3"
+      - "Parallel agents and a task-based workflow"
+      - "Design, software, slides, videos, and tools in a unified project"
+  - id: RPL-ENT-2026
+    publisher: Replit
+    title: "Replit Enterprise"
+    url: "https://replit.com/enterprise"
+    publication_date: null
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "Named enterprise references and product positioning"
+  - id: RPL-CUST-UKG
+    publisher: Replit
+    title: "The Future is Actually Very Human"
+    url: "https://replit.com/blog/replit-raises-400-million-dollars"
+    publication_date: "2026-03-11"
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "UKG has more than 16,000 employees"
+      - "UKG reported a 400% increase in its ability to gather product-led, customer-driven feedback before engineering investment"
+      - "UKG uses Replit for rapid prototyping, product development, and internal tools"
+  - id: RPL-ENT-DOC-2026
+    publisher: Replit
+    title: "Replit Enterprise"
+    url: "https://docs.replit.com/billing/plans/replit-enterprise"
+    publication_date: null
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "Unlimited seats and self-serve enterprise upgrade"
+      - "Annual credit commitments and pay-as-you-go usage"
+      - "SSO, SAML, SCIM, RBAC, audit logging, and deployment controls"
+      - "Databricks, BigQuery, Microsoft Fabric, Hex, and Snowflake integrations"
+  - id: RPL-SEC-DOC-2026
+    publisher: Replit
+    title: "Information Security"
+    url: "https://docs.replit.com/teams/information-security/overview"
+    publication_date: null
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "SOC 2 Type 2 attestation"
+      - "TLS 1.2+ in transit and AES-256 at rest"
+      - "Private-network architecture and WAF protection"
+      - "US hosting with an optional India region"
+  - id: RPL-REVIEW-2025
+    publisher: Replit
+    title: "2025: Replit in Review"
+    url: "https://replit.com/blog/2025-replit-in-review"
+    publication_date: "2025-12-18"
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "SOC 2 Type II with zero exceptions"
+      - "Enterprise controls and ecosystem progress"
+  - id: RPL-SECURITY-AGENT
+    publisher: Replit
+    title: "Meet Replit Security Agent"
+    url: "https://replit.com/blog/meet-replit-security-agent"
+    publication_date: null
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "Agent-assisted security review and remediation workflow"
+  - id: RPL-PRICING-2026
+    publisher: Replit
+    title: "Pricing and Plans"
+    url: "https://replit.com/pricing"
+    publication_date: null
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "Free, individual, team, and enterprise monetization structure"
+      - "Usage credits and enterprise commitment architecture"
+  - id: RPL-GOOGLE-2026
+    publisher: Replit
+    title: "Build anything. With Google."
+    url: "https://replit.com/partners/google"
+    publication_date: null
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "Gemini models, Google Cloud infrastructure, and Workspace integrations"
+  - id: RPL-MICROSOFT-2026
+    publisher: Replit
+    title: "Replit × Microsoft Fabric"
+    url: "https://replit.com/partners/microsoft"
+    publication_date: null
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "OneLake, Entra, Purview, and Microsoft Fabric integration"
+  - id: RPL-LEADERSHIP-AMJAD
+    publisher: Replit
+    title: "Amjad Masad"
+    url: "https://replit.com/blog/author/amjad-masad"
+    publication_date: "2023-10-05"
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "Amjad Masad is Replit's founder and CEO"
+  - id: RPL-BRAND
+    publisher: Replit
+    title: "Replit Brand"
+    url: "https://replit.com/brand"
+    publication_date: null
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "Official Replit visual identity and assets"
+  - id: TECHCRUNCH-D-2026
+    publisher: TechCrunch
+    title: "Replit snags $9B valuation 6 months after hitting $3B"
+    url: "https://techcrunch.com/2026/03/11/replit-snags-9b-valuation-6-months-after-hitting-3b/"
+    publication_date: "2026-03-11"
+    access_date: "2026-09-03"
+    quality: major_press
+    evidence_class: public
+    claims:
+      - "Series D context and prior valuation"
+  - id: SACRA-2025
+    publisher: Sacra
+    title: "Replit at $253M ARR growing 2,352% YoY"
+    url: "https://sacra.com/research/replit-at-253m-arr-growing-2352-yoy/"
+    publication_date: null
+    access_date: "2026-09-03"
+    quality: third_party_analysis
+    evidence_class: estimate
+    claims:
+      - "Third-party revenue and margin estimates"
+  - id: GITHUB-OCTOVERSE-2025
+    publisher: GitHub
+    title: "Octoverse 2025"
+    url: "https://github.blog/news-insights/octoverse/"
+    publication_date: "2025-11-01"
+    access_date: "2026-09-03"
+    quality: primary_research
+    evidence_class: public
+    claims:
+      - "Global developer and AI coding adoption context"
+  - id: EVANS-DEVELOPERS-2024
+    publisher: Evans Data Corporation
+    title: "Global Developer Population and Demographic Study"
+    url: "https://evansdata.com/press/viewRelease.php?pressID=365"
+    publication_date: "2024-07-29"
+    access_date: "2026-09-03"
+    quality: primary_research
+    evidence_class: public
+    claims:
+      - "27 million professional developers worldwide"
+  - id: IDC-DEVELOPER-2024
+    publisher: IDC
+    title: "Worldwide Developer Population Forecast"
+    url: "https://my.idc.com/getdoc.jsp?containerId=US53592125"
+    publication_date: "2025"
+    access_date: "2026-09-03"
+    quality: market_research
+    evidence_class: public
+    claims:
+      - "40.1 million developers in 2025, projected to reach 59.5 million by 2029"
+  - id: IDC-KNOWLEDGE-2025
+    publisher: IDC
+    title: "Worldwide Knowledge Worker Forecast"
+    url: "https://my.idc.com/getdoc.jsp?containerId=US53782225"
+    publication_date: "2025"
+    access_date: "2026-09-03"
+    quality: market_research
+    evidence_class: public
+    claims:
+      - "888 million knowledge workers in 2025, projected to reach 1.2 billion by 2029"
+  - id: MS-WORK-TREND-2024
+    publisher: Microsoft and LinkedIn
+    title: "AI at work is here. Now comes the hard part."
+    url: "https://www.microsoft.com/en-us/worklab/work-trend-index/ai-at-work-is-here-now-comes-the-hard-part"
+    publication_date: "2024-05-08"
+    access_date: "2026-09-03"
+    quality: primary_research
+    evidence_class: public
+    claims:
+      - "75% of global knowledge workers reported using generative AI at work"
+  - id: GARTNER-AI-CODE-2024
+    publisher: Gartner
+    title: "Gartner Says 75% of Enterprise Software Engineers Will Use AI Code Assistants by 2028"
+    url: "https://www.gartner.com/en/newsroom/press-releases/2024-04-11-gartner-says-75-percent-of-enterprise-software-engineers-will-use-ai-code-assistants-by-2028"
+    publication_date: "2024-04-11"
+    access_date: "2026-09-03"
+    quality: market_research
+    evidence_class: public
+    claims:
+      - "75% of enterprise software engineers expected to use AI code assistants by 2028"
+      - "Fewer than 10% used AI code assistants in early 2023"
+  - id: GARTNER-CLOUD-2024
+    publisher: Gartner
+    title: "Worldwide Public Cloud End-User Spending to Total $723.4 Billion in 2025"
+    url: "https://www.gartner.com/en/newsroom/press-releases/2024-11-19-gartner-forecasts-worldwide-public-cloud-end-user-spending-to-total-723-billion-dollars-in-2025"
+    publication_date: "2024-11-19"
+    access_date: "2026-09-03"
+    quality: market_research
+    evidence_class: public
+    claims:
+      - "$723.4 billion forecast public-cloud end-user spending in 2025"
+  - id: GVR-AI-CODE-2024
+    publisher: Grand View Research
+    title: "AI Code Tools Market Size and Share Report, 2024–2030"
+    url: "https://www.grandviewresearch.com/industry-analysis/ai-code-tools-market-report"
+    publication_date: "2024"
+    access_date: "2026-09-03"
+    quality: market_research
+    evidence_class: public
+    claims:
+      - "AI code tools market growth triangulation"
+  - id: CURSOR-D-2025
+    publisher: Cursor
+    title: "Cursor Series D"
+    url: "https://cursor.com/blog/series-d"
+    publication_date: "2025-11-13"
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "$2.3 billion financing at a $29.3 billion valuation"
+      - "More than $1 billion annualized revenue"
+  - id: ANTHROPIC-CLAUDE-CODE-2025
+    publisher: Anthropic
+    title: "Anthropic acquires Bun as Claude Code reaches $1B milestone"
+    url: "https://www.anthropic.com/news/anthropic-acquires-bun-as-claude-code-reaches-usd1b-milestone"
+    publication_date: "2025-12-03"
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "Claude Code reached $1 billion run-rate revenue six months after public launch"
+  - id: LOVABLE-B-2025
+    publisher: Lovable
+    title: "Series B"
+    url: "https://lovable.dev/blog/series-b"
+    publication_date: "2025-12-18"
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "$330 million financing at a $6.6 billion valuation"
+      - "100,000+ new projects per day and 25 million+ total projects"
+  - id: MSFT-FY25-Q4
+    publisher: Microsoft
+    title: "FY 2025 Q4 Earnings"
+    url: "https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4"
+    publication_date: "2025-07-30"
+    access_date: "2026-09-03"
+    quality: public_company
+    evidence_class: public
+    claims:
+      - "20 million GitHub Copilot users and adoption at 90% of the Fortune 100"
+  - id: COGNITION-WINDSURF
+    publisher: Cognition
+    title: "Cognition and Windsurf"
+    url: "https://cognition.com/blog/windsurf"
+    publication_date: "2025-07-14"
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "Windsurf reported $82 million ARR and more than 350 enterprise customers"
+  - id: V0-DOCS
+    publisher: Vercel
+    title: "v0 Documentation"
+    url: "https://v0.app/docs.md"
+    publication_date: null
+    access_date: "2026-09-03"
+    quality: primary
+    evidence_class: public
+    claims:
+      - "Prompt-to-code product for full-stack applications and agents with Vercel deployment"
+  - id: COMP-CRM-2026
+    publisher: Stock Analysis
+    title: "Salesforce Statistics"
+    url: "https://stockanalysis.com/stocks/crm/statistics/"
+    publication_date: null
+    access_date: "2026-09-03"
+    quality: market_data
+    evidence_class: public
+    claims:
+      - "Salesforce forward price-to-sales multiple of approximately 4.5x"
+  - id: COMP-NOW-2026
+    publisher: Stock Analysis
+    title: "ServiceNow Statistics"
+    url: "https://stockanalysis.com/stocks/now/statistics/"
+    publication_date: null
+    access_date: "2026-09-03"
+    quality: market_data
+    evidence_class: public
+    claims:
+      - "ServiceNow forward price-to-sales multiple of approximately 8.5x"
+  - id: COMP-MSFT-2026
+    publisher: Stock Analysis
+    title: "Microsoft Statistics"
+    url: "https://stockanalysis.com/stocks/msft/statistics/"
+    publication_date: null
+    access_date: "2026-09-03"
+    quality: market_data
+    evidence_class: public
+    claims:
+      - "Microsoft market-cap-to-LTM-revenue proxy of approximately 11.4x"
+  - id: COMP-TEAM-2026
+    publisher: Stock Analysis
+    title: "Atlassian Statistics"
+    url: "https://stockanalysis.com/stocks/team/statistics/"
+    publication_date: null
+    access_date: "2026-09-03"
+    quality: market_data
+    evidence_class: public
+    claims:
+      - "Atlassian market-cap-to-LTM-revenue proxy of approximately 7.5x"
+  - id: COMP-GTLB-2026
+    publisher: Stock Analysis
+    title: "GitLab Statistics"
+    url: "https://stockanalysis.com/stocks/gtlb/statistics/"
+    publication_date: null
+    access_date: "2026-09-03"
+    quality: market_data
+    evidence_class: public
+    claims:
+      - "GitLab market-cap-to-LTM-revenue proxy of approximately 7.7x"
+  - id: COMP-NET-2026
+    publisher: Stock Analysis
+    title: "Cloudflare Statistics"
+    url: "https://stockanalysis.com/stocks/net/statistics/"
+    publication_date: null
+    access_date: "2026-09-03"
+    quality: market_data
+    evidence_class: public
+    claims:
+      - "Cloudflare market-cap-to-LTM-revenue proxy of approximately 40.4x"
+  - id: MODEL-ESTIMATES
+    publisher: Analyst model
+    title: "Replit Series E operating model"
+    url: null
+    publication_date: "2026-09-03"
+    access_date: "2026-09-03"
+    quality: modeled
+    evidence_class: estimate
+    claims:
+      - "All non-public historical KPIs, forecasts, scenarios, unit economics, pipeline, and valuation outputs"

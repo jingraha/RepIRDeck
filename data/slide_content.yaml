@@ -1,0 +1,127 @@
+meta:
+  confidentiality: "Confidential | Illustrative analyst estimates based on public information"
+  estimate_note: "Est. = analyst estimate; MT = management target; Derived = calculated from cited public information."
+
+slides:
+  1:
+    title: "Build the software the world is waiting for"
+    subtitle: "Series E financing | September 2026"
+  2:
+    title: "$1B to compound the category leader"
+    subtitle: "Primary growth capital plus targeted stakeholder liquidity"
+  3:
+    title: "Replit is becoming the creation layer for software"
+    subtitle: "Five reinforcing advantages support durable category leadership"
+  4:
+    title: "Mass distribution is converting into an enterprise platform"
+    subtitle: "Consumer-scale reach with expanding monetization and governance"
+  5:
+    title: "Software creation expands from millions of developers to billions of people"
+    subtitle: "Replit translates intent into deployed software"
+  6:
+    title: "Software demand is unlimited; expert capacity is not"
+    subtitle: "The traditional stack fragments creation across scarce skills and disconnected tools"
+  7:
+    title: "One agentic cloud replaces the fragmented software lifecycle"
+    subtitle: "From idea to production in a single collaborative environment"
+  8:
+    title: "Agent 4 turns human intent into parallel, production-ready work"
+    subtitle: "A multi-agent workflow keeps users in the creative loop"
+  9:
+    title: "Customers trade weeks of coordination for hours of creation"
+    subtitle: "Faster feedback compounds into better products and lower opportunity cost"
+  10:
+    title: "Five structural shifts make this market inevitable now"
+    subtitle: "Capability, cost, labor, distribution, and governance have crossed adoption thresholds"
+  11:
+    title: "Replit addresses a $250B creation and runtime opportunity"
+    subtitle: "A bottom-up market model spans creators, teams, enterprises, and deployed workloads"
+  12:
+    title: "Replit is the only broad platform spanning intent, code, cloud, and governance"
+    subtitle: "Point tools optimize one step; Replit owns the complete build-to-run loop"
+  13:
+    title: "Revenue is scaling faster than the installed base"
+    subtitle: "Agent adoption and enterprise expansion create multiple monetization vectors"
+  14:
+    title: "A diversified, low-concentration model is shifting toward enterprise commitments"
+    subtitle: "Recurring subscriptions anchor revenue while usage captures customer value"
+  15:
+    title: "Cohorts expand as teams move from prototypes to production"
+    subtitle: "Estimated retention reflects growing workload depth and organizational adoption"
+  16:
+    title: "Enterprise proof is moving from experimentation to operating leverage"
+    subtitle: "Named customers demonstrate speed, collaboration, and measurable feedback gains"
+  17:
+    title: "Free creation acquires users; subscriptions, agents, and runtime monetize success"
+    subtitle: "A land-expand-deploy model aligns price with delivered value"
+  18:
+    title: "Scale and model efficiency unlock software-like economics"
+    subtitle: "Compute cost declines while higher-value enterprise mix improves contribution"
+  19:
+    title: "Product-led distribution creates an efficient path into the enterprise"
+    subtitle: "Individual builders seed teams, workloads, and centrally governed deployments"
+  20:
+    title: "Pipeline depth supports the next phase of predictable growth"
+    subtitle: "Coverage is strong; execution focus shifts to conversion and rep productivity"
+  21:
+    title: "Competition validates the category—but remains structurally fragmented"
+    subtitle: "Replit differentiates through breadth, cloud runtime, collaboration, and distribution"
+  22:
+    title: "Every successful build strengthens the next one"
+    subtitle: "Distribution, workflow data, runtime, ecosystem, and governance form a compounding moat"
+  23:
+    title: "The model is crossing from hypergrowth investment to operating leverage"
+    subtitle: "Gross-margin expansion increasingly funds product and go-to-market scale"
+  24:
+    title: "The base case reaches $5.3B revenue with durable growth"
+    subtitle: "Enterprise and workload monetization become the majority of the business"
+  25:
+    title: "Gross-margin expansion brings free-cash-flow breakeven within reach"
+    subtitle: "Efficiency and mix offset continued investment in product and distribution"
+  26:
+    title: "$800M of primary capital funds four measurable growth engines"
+    subtitle: "$200M of secondary liquidity is separate from company proceeds"
+  27:
+    title: "This round finances the milestones required for public-market readiness"
+    subtitle: "Scale, retention, margins, governance, and international depth advance together"
+  28:
+    title: "Founder-led vision with an institutional mandate"
+    subtitle: "The next phase pairs product velocity with scaled operating discipline"
+  29:
+    title: "The largest risks are visible, measurable, and actively mitigated"
+    subtitle: "The plan preserves strategic flexibility while building durable control points"
+  30:
+    title: "Replit can become the default way the world creates software"
+    subtitle: "A $1B Series E accelerates the path from category leadership to enduring platform"
+
+source_map:
+  1: [RPL-BRAND, MODEL-ESTIMATES]
+  2: [RPL-C-2025, RPL-D-2026, MODEL-ESTIMATES]
+  3: [RPL-D-2026, MODEL-ESTIMATES]
+  4: [RPL-D-2026, TECHCRUNCH-D-2026, MODEL-ESTIMATES]
+  5: [RPL-D-2026]
+  6: [GITHUB-OCTOVERSE-2025, MODEL-ESTIMATES]
+  7: [RPL-D-2026, RPL-ENT-DOC-2026]
+  8: [RPL-AGENT4-2026]
+  9: [RPL-CUST-UKG, MODEL-ESTIMATES]
+  10: [GARTNER-AI-CODE-2024, MS-WORK-TREND-2024, GARTNER-CLOUD-2024, MODEL-ESTIMATES]
+  11: [EVANS-DEVELOPERS-2024, IDC-DEVELOPER-2024, IDC-KNOWLEDGE-2025, GARTNER-CLOUD-2024, MODEL-ESTIMATES]
+  12: [RPL-AGENT4-2026, RPL-ENT-DOC-2026, CURSOR-D-2025, ANTHROPIC-CLAUDE-CODE-2025, LOVABLE-B-2025, MSFT-FY25-Q4, COGNITION-WINDSURF, V0-DOCS, MODEL-ESTIMATES]
+  13: [RPL-D-2026, SACRA-2025, MODEL-ESTIMATES]
+  14: [RPL-PRICING-2026, RPL-ENT-DOC-2026, MODEL-ESTIMATES]
+  15: [MODEL-ESTIMATES]
+  16: [RPL-CUST-UKG, RPL-ENT-2026]
+  17: [RPL-PRICING-2026, RPL-ENT-DOC-2026]
+  18: [SACRA-2025, MODEL-ESTIMATES]
+  19: [RPL-D-2026, RPL-ENT-2026, MODEL-ESTIMATES]
+  20: [MODEL-ESTIMATES]
+  21: [RPL-D-2026, CURSOR-D-2025, ANTHROPIC-CLAUDE-CODE-2025, LOVABLE-B-2025, MSFT-FY25-Q4, COGNITION-WINDSURF, V0-DOCS, MODEL-ESTIMATES]
+  22: [RPL-D-2026, RPL-AGENT4-2026, RPL-ENT-DOC-2026, RPL-SEC-DOC-2026, RPL-GOOGLE-2026, RPL-MICROSOFT-2026, MODEL-ESTIMATES]
+  23: [SACRA-2025, MODEL-ESTIMATES]
+  24: [MODEL-ESTIMATES]
+  25: [MODEL-ESTIMATES]
+  26: [MODEL-ESTIMATES]
+  27: [MODEL-ESTIMATES]
+  28: [RPL-LEADERSHIP-AMJAD, RPL-D-2026, TECHCRUNCH-D-2026]
+  29: [RPL-REVIEW-2025, RPL-SEC-DOC-2026, RPL-SECURITY-AGENT, MODEL-ESTIMATES]
+  30: [RPL-D-2026, MODEL-ESTIMATES]
