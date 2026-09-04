@@ -1,0 +1,127 @@
+meta:
+  confidentiality: "Confidential | Illustrative analyst estimates based on public information"
+  estimate_note: "Est. = analyst estimate. MT = management target. Derived = calculated from cited public information."
+
+slides:
+  1:
+    title: "Replit Series E"
+    subtitle: "Build and run software from one prompt | September 2026"
+  2:
+    title: "$1B funds the next stage of growth"
+    subtitle: "$800M funds the company. $200M provides employee and early-investor liquidity."
+  3:
+    title: "Five reasons to invest now"
+    subtitle: "Distribution, product depth, enterprise demand, unit economics, and market size"
+  4:
+    title: "50M users create a direct path into enterprise accounts"
+    subtitle: "Public scale metrics and modeled financial estimates"
+  5:
+    title: "Replit expands software creation beyond professional developers"
+    subtitle: "Students, founders, employees, and enterprises can build working software"
+  6:
+    title: "Software demand grows faster than engineering capacity"
+    subtitle: "The current workflow requires many tools, teams, and handoffs"
+  7:
+    title: "Replit puts the full software workflow in one product"
+    subtitle: "Users can plan, build, test, secure, deploy, and manage an app"
+  8:
+    title: "Agent 4 plans, builds, tests, and deploys in parallel"
+    subtitle: "The user sets the goal and reviews the result"
+  9:
+    title: "Customers build working software in days instead of weeks"
+    subtitle: "Faster prototypes reduce delay before an engineering team starts"
+  10:
+    title: "The market is ready now"
+    subtitle: "Models work better, cost less, and meet more enterprise requirements"
+  11:
+    title: "A $250B market supports several revenue streams"
+    subtitle: "The estimate covers individual users, business users, development teams, and running apps"
+  12:
+    title: "Replit covers more of the workflow than point tools"
+    subtitle: "The product connects app creation, code control, cloud runtime, collaboration, and governance"
+  13:
+    title: "Revenue grows across three distinct sources"
+    subtitle: "Stacked bars show individual, enterprise, and agent usage revenue"
+  14:
+    title: "Subscriptions provide a base. Usage adds growth."
+    subtitle: "The model has low estimated customer concentration and broad geographic reach"
+  15:
+    title: "Enterprise accounts expand after the first deployment"
+    subtitle: "The cohort model tracks retained and expanded annual recurring revenue"
+  16:
+    title: "UKG reports 4x more customer feedback before engineering starts"
+    subtitle: "UKG is an HR and workforce software company with more than 16,000 employees"
+  17:
+    title: "Replit charges for access, agent work, and running apps"
+    subtitle: "Free use brings in customers. Paid use grows with team size and workload."
+  18:
+    title: "Lower model cost lifts gross margin"
+    subtitle: "Enterprise contracts and lower compute cost improve contribution margin"
+  19:
+    title: "Individual users open the door to enterprise sales"
+    subtitle: "The sales team converts active users, teams, and deployed apps"
+  20:
+    title: "$880M of pipeline supports the 2027 plan"
+    subtitle: "The main work is conversion, security review, and sales-rep productivity"
+  21:
+    title: "Strong competitors prove the market. No product matches Replit's full scope."
+    subtitle: "Replit serves more users and covers more of the app workflow"
+  22:
+    title: "Usage data, runtime, and controls make Replit harder to replace"
+    subtitle: "Each deployed app adds product data, revenue, and customer dependence"
+  23:
+    title: "The P&L reaches operating profit in 2028"
+    subtitle: "Revenue growth and gross-margin gains fund continued investment"
+  24:
+    title: "Enterprise and runtime drive the 2026 to 2031 plan"
+    subtitle: "Stacked bars show individual, enterprise, and agent usage revenue"
+  25:
+    title: "Free cash flow turns positive in 2028"
+    subtitle: "Higher gross margin pays for product, sales, and international growth"
+  26:
+    title: "$800M funds six programs with clear milestones"
+    subtitle: "The $200M secondary purchase does not add cash to the company"
+  27:
+    title: "The Series E removes the cash constraint before the IPO"
+    subtitle: "The monthly model shows the funding date, cash floor, and target IPO window"
+  28:
+    title: "Founder-led product vision needs stronger operating systems"
+    subtitle: "The next stage adds financial, enterprise, international, and board depth"
+  29:
+    title: "The main risks have owners and controls"
+    subtitle: "The company tracks model cost, competition, security, sales conversion, and international delivery"
+  30:
+    title: "Replit can become the standard way to build software"
+    subtitle: "The Series E funds product, growth, talent, international expansion, and a clear path to IPO"
+
+source_map:
+  1: [RPL-BRAND, MODEL-ESTIMATES]
+  2: [RPL-C-2025, RPL-D-2026, MODEL-ESTIMATES]
+  3: [RPL-D-2026, MODEL-ESTIMATES]
+  4: [RPL-D-2026, TECHCRUNCH-D-2026, MODEL-ESTIMATES]
+  5: [RPL-D-2026]
+  6: [GITHUB-OCTOVERSE-2025, MODEL-ESTIMATES]
+  7: [RPL-D-2026, RPL-ENT-DOC-2026]
+  8: [RPL-AGENT4-2026]
+  9: [RPL-CUST-UKG, MODEL-ESTIMATES]
+  10: [GARTNER-AI-CODE-2024, MS-WORK-TREND-2024, GARTNER-CLOUD-2024, MODEL-ESTIMATES]
+  11: [EVANS-DEVELOPERS-2024, IDC-DEVELOPER-2024, IDC-KNOWLEDGE-2025, GARTNER-CLOUD-2024, MODEL-ESTIMATES]
+  12: [RPL-AGENT4-2026, RPL-ENT-DOC-2026, CURSOR-D-2025, ANTHROPIC-CLAUDE-CODE-2025, LOVABLE-B-2025, MSFT-FY25-Q4, COGNITION-WINDSURF, V0-DOCS, MODEL-ESTIMATES]
+  13: [RPL-D-2026, SACRA-2025, MODEL-ESTIMATES]
+  14: [RPL-PRICING-2026, RPL-ENT-DOC-2026, MODEL-ESTIMATES]
+  15: [MODEL-ESTIMATES]
+  16: [RPL-CUST-UKG, RPL-ENT-2026]
+  17: [RPL-PRICING-2026, RPL-ENT-DOC-2026]
+  18: [SACRA-2025, MODEL-ESTIMATES]
+  19: [RPL-D-2026, RPL-ENT-2026, MODEL-ESTIMATES]
+  20: [MODEL-ESTIMATES]
+  21: [RPL-D-2026, CURSOR-D-2025, ANTHROPIC-CLAUDE-CODE-2025, LOVABLE-B-2025, MSFT-FY25-Q4, COGNITION-WINDSURF, V0-DOCS, MODEL-ESTIMATES]
+  22: [RPL-D-2026, RPL-AGENT4-2026, RPL-ENT-DOC-2026, RPL-SEC-DOC-2026, RPL-GOOGLE-2026, RPL-MICROSOFT-2026, MODEL-ESTIMATES]
+  23: [SACRA-2025, MODEL-ESTIMATES]
+  24: [MODEL-ESTIMATES]
+  25: [MODEL-ESTIMATES]
+  26: [MODEL-ESTIMATES]
+  27: [MODEL-ESTIMATES]
+  28: [RPL-LEADERSHIP-AMJAD, RPL-D-2026, TECHCRUNCH-D-2026]
+  29: [RPL-REVIEW-2025, RPL-SEC-DOC-2026, RPL-SECURITY-AGENT, MODEL-ESTIMATES]
+  30: [RPL-D-2026, MODEL-ESTIMATES]

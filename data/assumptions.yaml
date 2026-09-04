@@ -1,0 +1,191 @@
+meta:
+  company: Replit
+  as_of_date: "2026-09-03"
+  forecast_date: "2026-12-01"
+  currency: USD
+  units: USD millions unless noted
+  model_version: "1.0"
+
+transaction:
+  round: Series E
+  total_raise: 1000
+  primary: 800
+  secondary: 200
+  pre_money: 20000
+  prior_round_amount: 400
+  prior_round_valuation: 9000
+  prior_round_date: "2026-03-11"
+
+years: [2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031]
+
+financials:
+  revenue_by_segment:
+    individual: [10, 15, 95, 300, 500, 700, 880, 1050, 1200]
+    enterprise: [3, 6, 35, 160, 360, 650, 950, 1300, 1650]
+    usage_and_deploy: [3, 7, 40, 190, 380, 700, 1170, 1750, 2400]
+  gross_margin: [-0.10, 0.05, 0.28, 0.46, 0.58, 0.66, 0.71, 0.74, 0.76]
+  research_and_development: [45, 60, 140, 300, 380, 500, 650, 820, 980]
+  sales_and_marketing: [18, 25, 70, 150, 250, 400, 600, 820, 1030]
+  general_and_administrative: [17, 25, 45, 80, 110, 160, 220, 290, 360]
+  capital_expenditures: [10, 16, 35, 70, 90, 110, 135, 160, 190]
+  working_capital_change: [2, 3, 10, 20, 30, 35, 40, 50, 60]
+  stock_compensation: [8, 12, 28, 65, 95, 130, 170, 220, 275]
+
+kpis:
+  registered_users_m: [22.5, 30, 40, 50, 72, 100, 135, 175, 220]
+  monthly_active_builders_m: [2.5, 3.3, 6.8, 11, 16.5, 23, 31, 40, 50]
+  paid_individuals_m: [0.10, 0.16, 0.65, 1.80, 3.20, 5.10, 7.40, 9.80, 12.50]
+  enterprise_customers: [40, 100, 400, 1200, 2400, 4200, 6500, 9000, 12000]
+  exit_arr: [20, 28, 300, 1000, 1500, 2350, 3350, 4500, 5700]
+  international_revenue_share: [0.25, 0.28, 0.32, 0.36, 0.40, 0.44, 0.47, 0.50, 0.52]
+  enterprise_grr: [0.85, 0.88, 0.90, 0.92, 0.93, 0.94, 0.94, 0.95, 0.95]
+  enterprise_nrr: [1.15, 1.20, 1.30, 1.38, 1.35, 1.30, 1.25, 1.22, 1.20]
+  projects_created_m: [10, 16, 44, 140, 300, 560, 900, 1300, 1800]
+
+public_anchors:
+  fortune_500_share: 0.85
+  agent_4_speed_multiple: 10
+  ukg_feedback_capacity_multiple: 4
+  ukg_employees: 16000
+
+company_estimates:
+  countries_reached: 190
+
+problem_benchmarks:
+  specialized_tools: 6
+  handoffs_low: 7
+  handoffs_high: 12
+  cycle_weeks_low: 4
+  cycle_weeks_high: 12
+  agent_test_cost_usd: 1
+
+revenue_quality:
+  recurring_share_2026: 0.70
+  usage_share_2026: 0.30
+  us_share_2026: 0.57
+  emea_share_2026: 0.18
+  apac_share_2026: 0.20
+  other_share_2026: 0.05
+  top_10_customer_share_2026: 0.03
+  annual_commit_share_enterprise_2026: 0.74
+
+unit_economics:
+  years: [2025, 2026, 2027, 2028, 2029]
+  blended_gross_margin: [0.28, 0.46, 0.58, 0.66, 0.71]
+  individual_cac_usd: [55, 44, 39, 35, 32]
+  individual_payback_months: [9.0, 6.0, 5.0, 4.5, 4.0]
+  enterprise_cac_k: [145, 120, 105, 95, 90]
+  enterprise_payback_months: [19, 14, 12, 10, 9]
+  enterprise_ltv_cac: [3.2, 4.2, 5.0, 5.6, 6.0]
+  compute_cost_per_successful_build_index: [100, 72, 54, 42, 35]
+
+pipeline:
+  as_of: "2026-Q3"
+  qualified_pipeline: 880
+  late_stage_pipeline: 510
+  weighted_pipeline: 310
+  next_12m_new_arr_target: 260
+  coverage: 3.4
+  win_rate: 0.24
+  median_sales_cycle_days: 78
+  quota_attainment: 0.64
+  fully_ramped_reps: 96
+  new_arr_per_ramped_rep: 1.20
+  rep_ramp_months: 6
+
+cohorts:
+  years: [2023, 2024, 2025, 2026]
+  starting_arr: [8, 22, 86, 240]
+  month_12_multiple: [1.12, 1.22, 1.35, 1.38]
+  month_24_multiple: [1.28, 1.48, 1.62, null]
+  month_36_multiple: [1.42, 1.70, null, null]
+
+market:
+  segments:
+    - name: Individual creators
+      population_m: 125
+      annual_revenue_per_unit: 400
+      sam: 20000
+      color: orange
+    - name: Enterprise business builders
+      population_m: 200
+      annual_revenue_per_unit: 480
+      sam: 35000
+      color: blue
+    - name: Professional development teams
+      population_m: 45
+      annual_revenue_per_unit: 1200
+      sam: 20000
+      color: coral
+    - name: Agent and runtime workloads
+      population_m: 25
+      annual_revenue_per_unit: 2000
+      sam: 15000
+      color: charcoal
+
+use_of_proceeds:
+  - category: Model training and infrastructure
+    amount: 220
+    percent: 0.275
+    milestone: Train Replit models and cut compute cost per successful build by 65%
+    color: orange
+  - category: Enterprise expansion
+    amount: 160
+    percent: 0.20
+    milestone: Reach 4,200 enterprise customers and 94% gross retention
+    color: blue
+  - category: User growth
+    amount: 140
+    percent: 0.175
+    milestone: Reach 100M registered users and 5M paid individuals
+    color: coral
+  - category: International expansion
+    amount: 120
+    percent: 0.15
+    milestone: Add local infrastructure, sales, and compliance in Europe, India, and the Middle East
+    color: green
+  - category: Talent and research
+    amount: 120
+    percent: 0.15
+    milestone: Hire model, security, enterprise, and international leaders
+    color: orange_mid
+  - category: Execution reserve
+    amount: 40
+    percent: 0.05
+    milestone: Keep at least $250M of operating cash
+    color: gray_500
+
+cash:
+  as_of_date: "2026-09-30"
+  beginning_cash: 273.6
+  minimum_cash: 250
+  financing_close_date: "2026-11-30"
+  financing_fees: 30
+  ipo_target_date: "2030-09-30"
+  monthly_start: "2026-10-31"
+  monthly_end: "2031-12-31"
+  beginning_cash_2025: 40
+  prior_financing_by_year:
+    2025: 250
+    2026: 400
+
+scenarios:
+  downside:
+    revenue_multiplier: [1.00, 0.82, 0.73, 0.68, 0.66, 0.65]
+    gross_margin_delta: [0.00, -0.05, -0.07, -0.08, -0.08, -0.07]
+    opex_multiplier: [1.00, 0.93, 0.88, 0.85, 0.84, 0.84]
+  base:
+    revenue_multiplier: [1.00, 1.00, 1.00, 1.00, 1.00, 1.00]
+    gross_margin_delta: [0.00, 0.00, 0.00, 0.00, 0.00, 0.00]
+    opex_multiplier: [1.00, 1.00, 1.00, 1.00, 1.00, 1.00]
+  upside:
+    revenue_multiplier: [1.00, 1.12, 1.22, 1.30, 1.36, 1.40]
+    gross_margin_delta: [0.00, 0.03, 0.05, 0.06, 0.06, 0.06]
+    opex_multiplier: [1.00, 1.08, 1.14, 1.18, 1.20, 1.20]
+
+valuation:
+  ntm_revenue_year: 2027
+  selected_pre_money_multiple: 16.1
+  exit_year: 2030
+  exit_revenue_multiples: [6, 8, 10, 12]
+  dilution_buffer: 0.10
