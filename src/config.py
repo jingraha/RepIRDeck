@@ -14,13 +14,13 @@ ASSUMPTIONS_PATH = DATA_DIR / "assumptions.yaml"
 SOURCES_PATH = DATA_DIR / "public_sources.yaml"
 SLIDE_CONTENT_PATH = DATA_DIR / "slide_content.yaml"
 
-PPTX_PATH = OUTPUT_DIR / "replit_series_e_investor_deck_v3.pptx"
-XLSX_PATH = OUTPUT_DIR / "replit_series_e_sourcebook_v3.xlsx"
+PPTX_PATH = OUTPUT_DIR / "replit_series_e_investor_deck_v4.pptx"
+XLSX_PATH = OUTPUT_DIR / "replit_series_e_sourcebook_v4.xlsx"
 
-ACTIVE_SLIDE_IDS = tuple(
-    slide_id
-    for slide_id in range(1, 31)
-    if slide_id not in {16, 17, 20, 22}
+ACTIVE_SLIDE_IDS = (
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+    19, 21, 23, 24, 15, 18,
+    25, 26, 27, 28, 29, 30,
 )
 DISPLAY_SLIDE_NUMBER = {
     slide_id: index
