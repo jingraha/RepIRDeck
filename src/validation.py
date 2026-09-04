@@ -7,6 +7,7 @@ from typing import Any
 from openpyxl import load_workbook
 from pptx import Presentation
 
+from .config import ACTIVE_SLIDE_IDS
 from .model import ModelBundle
 from .sources import Source
 
@@ -28,7 +29,7 @@ def validate_inputs(
     slides = slide_content["slides"]
     source_map = slide_content["source_map"]
 
-    _assert(len(slides) == 30, "Exactly 30 slides are required")
+    _assert(len(slides) == 30, "The slide-content library must contain 30 source slides")
     _assert(set(slides) == set(range(1, 31)), "Slide numbers must be 1 through 30")
     _assert(
         set(source_map) == set(range(1, 31)),
@@ -142,7 +143,10 @@ def validate_outputs(
     _assert(xlsx_path.stat().st_size > 25_000, "Workbook appears incomplete")
 
     presentation = Presentation(pptx_path)
-    _assert(len(presentation.slides) == 30, "Presentation must contain 30 slides")
+    _assert(
+        len(presentation.slides) == len(ACTIVE_SLIDE_IDS),
+        f"Presentation must contain {len(ACTIVE_SLIDE_IDS)} slides",
+    )
     for slide_number, slide in enumerate(presentation.slides, 1):
         for shape in slide.shapes:
             _assert(shape.left >= 0, f"Slide {slide_number} has a shape left of canvas")

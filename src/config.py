@@ -14,8 +14,18 @@ ASSUMPTIONS_PATH = DATA_DIR / "assumptions.yaml"
 SOURCES_PATH = DATA_DIR / "public_sources.yaml"
 SLIDE_CONTENT_PATH = DATA_DIR / "slide_content.yaml"
 
-PPTX_PATH = OUTPUT_DIR / "replit_series_e_investor_deck_v2.pptx"
-XLSX_PATH = OUTPUT_DIR / "replit_series_e_sourcebook_v2.xlsx"
+PPTX_PATH = OUTPUT_DIR / "replit_series_e_investor_deck_v3.pptx"
+XLSX_PATH = OUTPUT_DIR / "replit_series_e_sourcebook_v3.xlsx"
+
+ACTIVE_SLIDE_IDS = tuple(
+    slide_id
+    for slide_id in range(1, 31)
+    if slide_id not in {16, 17, 20, 22}
+)
+DISPLAY_SLIDE_NUMBER = {
+    slide_id: index
+    for index, slide_id in enumerate(ACTIVE_SLIDE_IDS, 1)
+}
 
 SLIDE_WIDTH = Inches(13.333333)
 SLIDE_HEIGHT = Inches(7.5)
