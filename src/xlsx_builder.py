@@ -14,7 +14,12 @@ from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.dimensions import ColumnDimension
 
 from .charts import render_workbook_charts
-from .config import COLORS, OUTPUT_DIR, XLSX_PATH
+from .config import (
+    COLORS,
+    DISPLAY_SLIDE_NUMBER,
+    OUTPUT_DIR,
+    XLSX_PATH,
+)
 from .model import ModelBundle
 from .sources import Source, source_rows
 
@@ -1424,6 +1429,11 @@ def _metric_reconciliation_rows(
                 f"use.{key}",
             )
         )
+    metrics = [
+        (DISPLAY_SLIDE_NUMBER[item[0]], *item[1:])
+        for item in metrics
+        if item[0] in DISPLAY_SLIDE_NUMBER
+    ]
     metrics.sort(key=lambda item: (item[0], item[1]))
     rows = []
     for slide, metric, display, value, units, evidence, source_ids, key in metrics:

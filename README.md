@@ -1,6 +1,6 @@
 # Replit Series E investor materials
 
-This repository generates an illustrative 30-slide Replit Series E investor presentation and its supporting source and assumptions workbook.
+This repository generates an illustrative 24-slide Replit Series E investor presentation and its supporting source and assumptions workbook.
 
 The materials use public information plus clearly labeled analyst estimates. They do not contain Replit confidential information and are not investment advice.
 
@@ -13,8 +13,8 @@ python -m src.build
 
 Outputs:
 
-- `output/replit_series_e_investor_deck_v2.pptx`
-- `output/replit_series_e_sourcebook_v2.xlsx`
+- `output/replit_series_e_investor_deck_v4.pptx`
+- `output/replit_series_e_sourcebook_v4.xlsx`
 
 ## Update assumptions or evidence
 

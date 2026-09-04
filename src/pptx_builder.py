@@ -8,6 +8,7 @@ from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
 from pptx.util import Inches, Pt
 
 from .config import (
+    ACTIVE_SLIDE_IDS,
     COLORS,
     FONT_MONO,
     FONT_SANS,
@@ -54,6 +55,7 @@ class DeckBuilder:
         self.prs.slide_width = SLIDE_WIDTH
         self.prs.slide_height = SLIDE_HEIGHT
         self.blank_layout = self.prs.slide_layouts[6]
+        self.display_slide_number = 0
 
     def _new_slide(
         self,
@@ -63,6 +65,7 @@ class DeckBuilder:
         show_header: bool = True,
     ) -> Any:
         slide = self.prs.slides.add_slide(self.blank_layout)
+        self.display_slide_number += 1
         set_background(slide, "ink" if dark else "cream")
         if show_header:
             slide_copy = self.content["slides"][number]
@@ -105,11 +108,27 @@ class DeckBuilder:
                 color="charcoal" if dark else "gray_200",
                 width=0.8,
             )
-        self._footer(slide, number, dark=dark)
+        self._footer(
+            slide,
+            number,
+            self.display_slide_number,
+            dark=dark,
+        )
         return slide
 
-    def _footer(self, slide: Any, number: int, *, dark: bool = False) -> None:
-        source_text = format_slide_sources(number, self.sources, self.source_map)
+    def _footer(
+        self,
+        slide: Any,
+        content_number: int,
+        display_number: int,
+        *,
+        dark: bool = False,
+    ) -> None:
+        source_text = format_slide_sources(
+            content_number,
+            self.sources,
+            self.source_map,
+        )
         add_text(
             slide,
             source_text,
@@ -133,7 +152,7 @@ class DeckBuilder:
         )
         add_text(
             slide,
-            f"{number:02d}",
+            f"{display_number:02d}",
             12.35,
             7.12,
             0.34,
@@ -159,18 +178,12 @@ class DeckBuilder:
             self._slide_10_why_now,
             self._slide_11_market,
             self._slide_12_category_leadership,
-            self._slide_13_historical_growth,
-            self._slide_14_revenue_quality,
-            self._slide_15_retention,
-            self._slide_16_customer_proof,
-            self._slide_17_business_model,
-            self._slide_18_unit_economics,
             self._slide_19_gtm,
-            self._slide_20_pipeline,
             self._slide_21_competition,
-            self._slide_22_moat,
             self._slide_23_historical_financials,
             self._slide_24_operating_plan,
+            self._slide_15_retention,
+            self._slide_18_unit_economics,
             self._slide_25_profitability,
             self._slide_26_use_of_proceeds,
             self._slide_27_milestones,
@@ -178,6 +191,8 @@ class DeckBuilder:
             self._slide_29_risks,
             self._slide_30_closing,
         ]
+        if len(slide_methods) != len(ACTIVE_SLIDE_IDS):
+            raise ValueError("Active slide list does not match the slide methods")
         for method in slide_methods:
             method()
         output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -681,31 +696,31 @@ class DeckBuilder:
             slide,
             "Intent",
             6.30,
-            6.08,
+            6.38,
             1.0,
             0.25,
             font_size=9,
             color="gray_700",
             bold=True,
         )
-        add_chevron(slide, 7.22, 6.06, 0.34, 0.28, fill="orange")
+        add_chevron(slide, 7.22, 6.36, 0.34, 0.28, fill="orange")
         add_text(
             slide,
             "Agentic creation",
             7.72,
-            6.08,
+            6.38,
             1.7,
             0.25,
             font_size=9,
             color="gray_700",
             bold=True,
         )
-        add_chevron(slide, 9.42, 6.06, 0.34, 0.28, fill="blue")
+        add_chevron(slide, 9.42, 6.36, 0.34, 0.28, fill="blue")
         add_text(
             slide,
             "Deployed software",
             9.92,
-            6.08,
+            6.38,
             1.9,
             0.25,
             font_size=9,
@@ -867,38 +882,54 @@ class DeckBuilder:
             ("DEPLOY", "coral"),
             ("IMPROVE", "green"),
         ]
-        center_x, center_y = 10.99, 3.63
+        center_x, center_y = 10.99, 3.75
+        node_diameter = 0.72
         positions = [
-            (center_x - 0.50, center_y - 1.05),
-            (center_x + 0.72, center_y - 0.20),
-            (center_x - 0.50, center_y + 0.67),
-            (center_x - 1.74, center_y - 0.20),
+            (center_x - 0.36, center_y - 1.20),
+            (center_x + 0.69, center_y - 0.36),
+            (center_x - 0.36, center_y + 0.73),
+            (center_x - 1.41, center_y - 0.36),
         ]
+        for x2, y2 in (
+            (center_x, center_y - 0.84),
+            (center_x + 1.05, center_y),
+            (center_x, center_y + 1.09),
+            (center_x - 1.05, center_y),
+        ):
+            add_line(
+                slide,
+                center_x,
+                center_y,
+                x2,
+                y2,
+                color="gray_500",
+                width=1,
+            )
         for (label, color), (x, y) in zip(loop, positions, strict=True):
-            add_circle(slide, x, y, 0.96, fill=color)
+            add_circle(slide, x, y, node_diameter, fill=color)
             add_text(
                 slide,
                 label,
                 x,
                 y,
-                0.96,
-                0.96,
-                font_size=7.5,
+                node_diameter,
+                node_diameter,
+                font_size=6.3,
                 color="white",
                 bold=True,
                 align=PP_ALIGN.CENTER,
                 valign=MSO_ANCHOR.MIDDLE,
                 font_name=FONT_MONO,
             )
-        add_circle(slide, center_x - 0.47, center_y - 0.47, 0.94, fill="white")
+        add_circle(slide, center_x - 0.37, center_y - 0.37, 0.74, fill="white")
         add_text(
             slide,
             "DATA",
-            center_x - 0.47,
-            center_y - 0.47,
-            0.94,
-            0.94,
-            font_size=9,
+            center_x - 0.37,
+            center_y - 0.37,
+            0.74,
+            0.74,
+            font_size=7.5,
             color="ink",
             bold=True,
             align=PP_ALIGN.CENTER,
@@ -1150,11 +1181,21 @@ class DeckBuilder:
         add_tag(slide, "EST.", 5.04, 3.70, width=0.62)
 
         add_rect(slide, 0.65, 4.67, 5.75, 1.44, fill="white", line="gray_200", radius=True)
+        add_tag(
+            slide,
+            "EXAMPLE CUSTOMER: UKG",
+            0.95,
+            4.82,
+            fill="orange",
+            color="white",
+            width=1.55,
+        )
+        add_tag(slide, "PUBLIC", 5.18, 4.82, width=0.92)
         add_text(
             slide,
             f"{ukg_gain:.0%}",
             0.96,
-            4.93,
+            5.20,
             1.60,
             0.55,
             font_size=31,
@@ -1163,16 +1204,15 @@ class DeckBuilder:
         )
         add_text(
             slide,
-            "increase in UKG's ability to gather product-led,\ncustomer-driven feedback before engineering investment",
+            "more customer feedback before engineering starts",
             2.62,
-            4.91,
+            5.22,
             3.40,
-            0.72,
+            0.42,
             font_size=10,
             color="ink",
             bold=True,
         )
-        add_tag(slide, "PUBLIC", 5.20, 5.70, width=0.92)
 
         add_rect(slide, 6.73, 4.67, 5.95, 1.44, fill="ink", radius=True)
         add_text(
@@ -1330,41 +1370,6 @@ class DeckBuilder:
             bold=True,
         )
         add_tag(slide, "EST.", 11.46, 4.08, width=0.62, fill="charcoal", color="white")
-
-        add_rect(slide, 7.42, 5.54, 5.26, 0.96, fill="white", line="gray_200", radius=True)
-        add_text(
-            slide,
-            "2.1%",
-            7.76,
-            5.76,
-            1.15,
-            0.36,
-            font_size=20,
-            color="orange",
-            bold=True,
-        )
-        add_text(
-            slide,
-            "2031E revenue as a share of TAM",
-            9.08,
-            5.82,
-            3.10,
-            0.26,
-            font_size=9,
-            color="gray_700",
-            bold=True,
-        )
-        add_text(
-            slide,
-            "The market model is bottom-up. Third-party forecasts provide a reasonableness check.",
-            0.65,
-            5.80,
-            6.30,
-            0.44,
-            font_size=8.5,
-            color="gray_700",
-            italic=True,
-        )
 
     def _slide_12_category_leadership(self) -> None:
         slide = self._new_slide(12)
@@ -2953,8 +2958,6 @@ class DeckBuilder:
             value_format="${:,.0f}M",
             row_height=0.65,
         )
-        add_tag(slide, "EST.", 7.05, 2.17, width=0.62)
-
         add_rect(slide, 8.08, 1.72, 4.60, 4.82, fill="ink", radius=True)
         add_text(
             slide,
@@ -3323,16 +3326,16 @@ class DeckBuilder:
     def _slide_29_risks(self) -> None:
         slide = self._new_slide(29)
         rows = [
-            ("Model dependency & cost", "High", "Medium", "Routing, proprietary training, capacity contracts, price-to-value controls"),
-            ("Category competition", "High", "Medium", "Own the workflow, runtime, collaboration, and distribution"),
-            ("Code quality & security", "High", "Medium", "Automated testing, Security Agent, policy, auditability, human review"),
-            ("Enterprise conversion", "Medium", "Medium", "Self-serve land, field overlay, partners, customer success, governance"),
-            ("Growth concentration", "Medium", "Low", "Diversified users, low estimated account concentration, global expansion"),
-            ("International execution", "Medium", "Medium", "Regional infrastructure, compliance, payments, and channel partners"),
+            ("Model dependency and cost", "High", "Routing, Replit model training, capacity contracts, and usage pricing"),
+            ("Competition", "High", "Own the workflow, runtime, collaboration, and distribution"),
+            ("Code quality and security", "High", "Automated testing, Security Agent, policy, audit logs, and human review"),
+            ("Enterprise conversion", "Medium", "Product-led sales, field sales, partners, customer success, and governance"),
+            ("Revenue concentration", "Medium", "A broad user base, low estimated account concentration, and global sales"),
+            ("International delivery", "Medium", "Regional infrastructure, compliance, payments, and channel partners"),
         ]
         table_x, table_y = 0.65, 1.72
-        widths = [2.75, 1.05, 1.05, 7.18]
-        headers = ["Risk", "Impact", "Residual", "Mitigation"]
+        widths = [2.75, 1.20, 8.08]
+        headers = ["Risk", "Impact", "Mitigation"]
         cursor = table_x
         add_rect(slide, table_x, table_y, sum(widths), 0.68, fill="ink", radius=True)
         for width, header in zip(widths, headers, strict=True):
@@ -3347,17 +3350,17 @@ class DeckBuilder:
                 color="white",
                 bold=True,
                 font_name=FONT_MONO,
-                align=PP_ALIGN.CENTER if header in ("Impact", "Residual") else PP_ALIGN.LEFT,
+                align=PP_ALIGN.CENTER if header == "Impact" else PP_ALIGN.LEFT,
             )
             cursor += width
-        severity_color = {"High": "red", "Medium": "yellow", "Low": "green"}
+        severity_color = {"High": "red", "Medium": "yellow"}
         for row_index, row in enumerate(rows):
             y = table_y + 0.68 + row_index * 0.66
             fill = "white" if row_index % 2 == 0 else "gray_100"
             add_rect(slide, table_x, y, sum(widths), 0.66, fill=fill)
             cursor = table_x
             for col_index, (value, width) in enumerate(zip(row, widths, strict=True)):
-                if col_index in (1, 2):
+                if col_index == 1:
                     color = severity_color[value]
                     add_tag(
                         slide,
@@ -3381,19 +3384,6 @@ class DeckBuilder:
                         bold=col_index == 0,
                     )
                 cursor += width
-        add_rect(slide, 0.65, 6.44, 12.03, 0.08, fill="orange", radius=True)
-        add_text(
-            slide,
-            "The plan assumes stronger competition and continued model cost pressure.",
-            0.88,
-            6.16,
-            11.55,
-            0.24,
-            font_size=8.6,
-            color="gray_700",
-            bold=True,
-            align=PP_ALIGN.CENTER,
-        )
 
     def _slide_30_closing(self) -> None:
         slide = self._new_slide(30, dark=True, show_header=False)
